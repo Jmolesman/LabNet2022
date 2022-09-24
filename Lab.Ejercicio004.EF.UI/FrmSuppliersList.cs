@@ -10,18 +10,11 @@ using System.Windows.Forms;
 
 namespace Lab.Ejercicio004.EF.UI
 {
-    public partial class FrmMain : Form
+    public partial class FrmSuppliersList : Form
     {
-        public FrmMain()
+        public FrmSuppliersList()
         {
             InitializeComponent();
-        }
-
-        private void menuEmployeesLists_Click(object sender, EventArgs e)
-        {
-            FrmEmployeesList frmListOfEmployees = new FrmEmployeesList();
-            frmListOfEmployees.MdiParent = this;
-            frmListOfEmployees.Show();
         }
     }
 }

@@ -30,9 +30,9 @@ namespace Lab.Ejercicio004.EF.UI
         private void InitializeComponent()
         {
             this.dgvEmployeesList = new System.Windows.Forms.DataGridView();
-            this.btnInsertEmployee = new System.Windows.Forms.Button();
-            this.btnUpdateEmployee = new System.Windows.Forms.Button();
-            this.btnDeleteEmployee = new System.Windows.Forms.Button();
+            this.btnEmployeeInsert = new System.Windows.Forms.Button();
+            this.btnEmployeeUpdate = new System.Windows.Forms.Button();
+            this.btnEmployeeDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployeesList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,45 +44,50 @@ namespace Lab.Ejercicio004.EF.UI
             this.dgvEmployeesList.Size = new System.Drawing.Size(607, 252);
             this.dgvEmployeesList.TabIndex = 0;
             // 
-            // btnInsertEmployee
+            // btnEmployeeInsert
             // 
-            this.btnInsertEmployee.Location = new System.Drawing.Point(93, 279);
-            this.btnInsertEmployee.Name = "btnInsertEmployee";
-            this.btnInsertEmployee.Size = new System.Drawing.Size(109, 23);
-            this.btnInsertEmployee.TabIndex = 1;
-            this.btnInsertEmployee.Text = "Agregar Empleado";
-            this.btnInsertEmployee.UseVisualStyleBackColor = true;
+            this.btnEmployeeInsert.Location = new System.Drawing.Point(93, 279);
+            this.btnEmployeeInsert.Name = "btnEmployeeInsert";
+            this.btnEmployeeInsert.Size = new System.Drawing.Size(109, 23);
+            this.btnEmployeeInsert.TabIndex = 1;
+            this.btnEmployeeInsert.Text = "Agregar Empleado";
+            this.btnEmployeeInsert.UseVisualStyleBackColor = true;
+            this.btnEmployeeInsert.Click += new System.EventHandler(this.btnEmployeeInsert_Click);
             // 
-            // btnUpdateEmployee
+            // btnEmployeeUpdate
             // 
-            this.btnUpdateEmployee.Location = new System.Drawing.Point(261, 279);
-            this.btnUpdateEmployee.Name = "btnUpdateEmployee";
-            this.btnUpdateEmployee.Size = new System.Drawing.Size(109, 23);
-            this.btnUpdateEmployee.TabIndex = 2;
-            this.btnUpdateEmployee.Text = "Modificar Empleado";
-            this.btnUpdateEmployee.UseVisualStyleBackColor = true;
+            this.btnEmployeeUpdate.Location = new System.Drawing.Point(261, 279);
+            this.btnEmployeeUpdate.Name = "btnEmployeeUpdate";
+            this.btnEmployeeUpdate.Size = new System.Drawing.Size(109, 23);
+            this.btnEmployeeUpdate.TabIndex = 2;
+            this.btnEmployeeUpdate.Text = "Modificar Empleado";
+            this.btnEmployeeUpdate.UseVisualStyleBackColor = true;
+            this.btnEmployeeUpdate.Click += new System.EventHandler(this.btnEmployeeUpdate_Click);
             // 
-            // btnDeleteEmployee
+            // btnEmployeeDelete
             // 
-            this.btnDeleteEmployee.Location = new System.Drawing.Point(429, 279);
-            this.btnDeleteEmployee.Name = "btnDeleteEmployee";
-            this.btnDeleteEmployee.Size = new System.Drawing.Size(109, 23);
-            this.btnDeleteEmployee.TabIndex = 3;
-            this.btnDeleteEmployee.Text = "Eliminar Empleado";
-            this.btnDeleteEmployee.UseVisualStyleBackColor = true;
+            this.btnEmployeeDelete.Location = new System.Drawing.Point(429, 279);
+            this.btnEmployeeDelete.Name = "btnEmployeeDelete";
+            this.btnEmployeeDelete.Size = new System.Drawing.Size(109, 23);
+            this.btnEmployeeDelete.TabIndex = 3;
+            this.btnEmployeeDelete.Text = "Eliminar Empleado";
+            this.btnEmployeeDelete.UseVisualStyleBackColor = true;
+            this.btnEmployeeDelete.Click += new System.EventHandler(this.btnEmployeeDelete_Click);
             // 
             // FrmEmployeesList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(631, 314);
-            this.Controls.Add(this.btnDeleteEmployee);
-            this.Controls.Add(this.btnUpdateEmployee);
-            this.Controls.Add(this.btnInsertEmployee);
+            this.Controls.Add(this.btnEmployeeDelete);
+            this.Controls.Add(this.btnEmployeeUpdate);
+            this.Controls.Add(this.btnEmployeeInsert);
             this.Controls.Add(this.dgvEmployeesList);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmEmployeesList";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Lista de Empleados";
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployeesList)).EndInit();
             this.ResumeLayout(false);
@@ -92,8 +97,8 @@ namespace Lab.Ejercicio004.EF.UI
         #endregion
 
         private System.Windows.Forms.DataGridView dgvEmployeesList;
-        private System.Windows.Forms.Button btnInsertEmployee;
-        private System.Windows.Forms.Button btnUpdateEmployee;
-        private System.Windows.Forms.Button btnDeleteEmployee;
+        private System.Windows.Forms.Button btnEmployeeInsert;
+        private System.Windows.Forms.Button btnEmployeeUpdate;
+        private System.Windows.Forms.Button btnEmployeeDelete;
     }
 }
