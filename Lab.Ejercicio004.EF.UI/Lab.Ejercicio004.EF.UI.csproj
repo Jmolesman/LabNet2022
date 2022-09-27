@@ -56,23 +56,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FrmClientsList.cs">
+    <Compile Include="FrmCategoriesInsertUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmClientsList.Designer.cs">
-      <DependentUpon>FrmClientsList.cs</DependentUpon>
+    <Compile Include="FrmCategoriesInsertUpdate.Designer.cs">
+      <DependentUpon>FrmCategoriesInsertUpdate.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmEmployeesInsertUpdate.cs">
+    <Compile Include="FrmCategoriesList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmEmployeesInsertUpdate.Designer.cs">
-      <DependentUpon>FrmEmployeesInsertUpdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrmEmployeesList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmEmployeesList.Designer.cs">
-      <DependentUpon>FrmEmployeesList.cs</DependentUpon>
+    <Compile Include="FrmCategoriesList.Designer.cs">
+      <DependentUpon>FrmCategoriesList.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
@@ -80,17 +74,23 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmOrdersList.cs">
+    <Compile Include="FrmProductsInsertUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmOrdersList.Designer.cs">
-      <DependentUpon>FrmOrdersList.cs</DependentUpon>
+    <Compile Include="FrmProductsInsertUpdate.Designer.cs">
+      <DependentUpon>FrmProductsInsertUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmProductsLists.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmProductsLists.Designer.cs">
       <DependentUpon>FrmProductsLists.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSupplierInsertUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSupplierInsertUpdate.Designer.cs">
+      <DependentUpon>FrmSupplierInsertUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmSuppliersList.cs">
       <SubType>Form</SubType>
@@ -100,23 +100,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FrmClientsList.resx">
-      <DependentUpon>FrmClientsList.cs</DependentUpon>
+    <EmbeddedResource Include="FrmCategoriesInsertUpdate.resx">
+      <DependentUpon>FrmCategoriesInsertUpdate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmEmployeesInsertUpdate.resx">
-      <DependentUpon>FrmEmployeesInsertUpdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmEmployeesList.resx">
-      <DependentUpon>FrmEmployeesList.cs</DependentUpon>
+    <EmbeddedResource Include="FrmCategoriesList.resx">
+      <DependentUpon>FrmCategoriesList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmOrdersList.resx">
-      <DependentUpon>FrmOrdersList.cs</DependentUpon>
+    <EmbeddedResource Include="FrmProductsInsertUpdate.resx">
+      <DependentUpon>FrmProductsInsertUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmProductsLists.resx">
       <DependentUpon>FrmProductsLists.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSupplierInsertUpdate.resx">
+      <DependentUpon>FrmSupplierInsertUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSuppliersList.resx">
       <DependentUpon>FrmSuppliersList.cs</DependentUpon>
@@ -143,6 +143,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lab.Ejercicio004.EF.Entities\Lab.Ejercicio004.EF.Entities.csproj">
+      <Project>{5D313B59-D696-4F9D-91BB-20451E5FF4E4}</Project>
+      <Name>Lab.Ejercicio004.EF.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lab.Ejercicio004.EF.Logic\Lab.Ejercicio004.EF.Logic.csproj">
+      <Project>{e447d2a1-adde-4e23-b6df-15fe97eb9285}</Project>
+      <Name>Lab.Ejercicio004.EF.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lab.Ejercicio004.EF.Utils\Lab.Ejercicio004.EF.Utils.csproj">
+      <Project>{87469680-03a2-4381-a8ca-b398b42baa01}</Project>
+      <Name>Lab.Ejercicio004.EF.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

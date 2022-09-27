@@ -30,112 +30,89 @@ namespace Lab.Ejercicio004.EF.UI
         private void InitializeComponent()
         {
             this.menuMainForm = new System.Windows.Forms.MenuStrip();
-            this.menuOrders = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuOrdersLists = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuProducts = new System.Windows.Forms.ToolStripMenuItem();
             this.menuProductsLists = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuPerson = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuEmployees = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuEmployeesLists = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuClients = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuClientsLists = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuSuppliers = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuSuppliersLists = new System.Windows.Forms.ToolStripMenuItem();
+            this.listaDeProveedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listaDeCategoriasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.suppliersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listOfSuppliersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.categoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listOfCategoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.productsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listOfProductsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMainForm.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuMainForm
             // 
             this.menuMainForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuOrders,
-            this.menuProducts,
-            this.menuPerson});
+            this.suppliersToolStripMenuItem,
+            this.categoryToolStripMenuItem,
+            this.productsToolStripMenuItem});
             this.menuMainForm.Location = new System.Drawing.Point(0, 0);
             this.menuMainForm.Name = "menuMainForm";
             this.menuMainForm.Size = new System.Drawing.Size(675, 24);
             this.menuMainForm.TabIndex = 3;
             this.menuMainForm.Text = "Menu";
             // 
-            // menuOrders
-            // 
-            this.menuOrders.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuOrdersLists});
-            this.menuOrders.Name = "menuOrders";
-            this.menuOrders.Size = new System.Drawing.Size(63, 20);
-            this.menuOrders.Text = "Ordenes";
-            // 
-            // menuOrdersLists
-            // 
-            this.menuOrdersLists.Name = "menuOrdersLists";
-            this.menuOrdersLists.Size = new System.Drawing.Size(202, 22);
-            this.menuOrdersLists.Text = "Lista de Ordenes Activas";
-            // 
-            // menuProducts
-            // 
-            this.menuProducts.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuProductsLists});
-            this.menuProducts.Name = "menuProducts";
-            this.menuProducts.Size = new System.Drawing.Size(73, 20);
-            this.menuProducts.Text = "Productos";
-            // 
             // menuProductsLists
             // 
             this.menuProductsLists.Name = "menuProductsLists";
-            this.menuProductsLists.Size = new System.Drawing.Size(180, 22);
-            this.menuProductsLists.Text = "Lista de Productos";
+            this.menuProductsLists.Size = new System.Drawing.Size(32, 19);
             // 
-            // menuPerson
+            // listaDeProveedoresToolStripMenuItem
             // 
-            this.menuPerson.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuEmployees,
-            this.menuClients,
-            this.menuSuppliers});
-            this.menuPerson.Name = "menuPerson";
-            this.menuPerson.Size = new System.Drawing.Size(66, 20);
-            this.menuPerson.Text = "Personas";
+            this.listaDeProveedoresToolStripMenuItem.Name = "listaDeProveedoresToolStripMenuItem";
+            this.listaDeProveedoresToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
             // 
-            // menuEmployees
+            // listaDeCategoriasToolStripMenuItem
             // 
-            this.menuEmployees.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuEmployeesLists});
-            this.menuEmployees.Name = "menuEmployees";
-            this.menuEmployees.Size = new System.Drawing.Size(180, 22);
-            this.menuEmployees.Text = "Empleados";
+            this.listaDeCategoriasToolStripMenuItem.Name = "listaDeCategoriasToolStripMenuItem";
+            this.listaDeCategoriasToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
             // 
-            // menuEmployeesLists
+            // suppliersToolStripMenuItem
             // 
-            this.menuEmployeesLists.Name = "menuEmployeesLists";
-            this.menuEmployeesLists.Size = new System.Drawing.Size(180, 22);
-            this.menuEmployeesLists.Text = "Lista de Empleados";
-            this.menuEmployeesLists.Click += new System.EventHandler(this.menuEmployeesLists_Click);
+            this.suppliersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.listOfSuppliersToolStripMenuItem});
+            this.suppliersToolStripMenuItem.Name = "suppliersToolStripMenuItem";
+            this.suppliersToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.suppliersToolStripMenuItem.Text = "Suppliers";
             // 
-            // menuClients
+            // listOfSuppliersToolStripMenuItem
             // 
-            this.menuClients.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuClientsLists});
-            this.menuClients.Name = "menuClients";
-            this.menuClients.Size = new System.Drawing.Size(180, 22);
-            this.menuClients.Text = "Clientes";
+            this.listOfSuppliersToolStripMenuItem.Name = "listOfSuppliersToolStripMenuItem";
+            this.listOfSuppliersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.listOfSuppliersToolStripMenuItem.Text = "List of Suppliers";
+            this.listOfSuppliersToolStripMenuItem.Click += new System.EventHandler(this.listOfSuppliersToolStripMenuItem_Click);
             // 
-            // menuClientsLists
+            // categoryToolStripMenuItem
             // 
-            this.menuClientsLists.Name = "menuClientsLists";
-            this.menuClientsLists.Size = new System.Drawing.Size(180, 22);
-            this.menuClientsLists.Text = "Lista de Clientes";
+            this.categoryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.listOfCategoriesToolStripMenuItem});
+            this.categoryToolStripMenuItem.Name = "categoryToolStripMenuItem";
+            this.categoryToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
+            this.categoryToolStripMenuItem.Text = "Categories";
             // 
-            // menuSuppliers
+            // listOfCategoriesToolStripMenuItem
             // 
-            this.menuSuppliers.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuSuppliersLists});
-            this.menuSuppliers.Name = "menuSuppliers";
-            this.menuSuppliers.Size = new System.Drawing.Size(180, 22);
-            this.menuSuppliers.Text = "Proveedores";
+            this.listOfCategoriesToolStripMenuItem.Name = "listOfCategoriesToolStripMenuItem";
+            this.listOfCategoriesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.listOfCategoriesToolStripMenuItem.Text = "List of Categories";
+            this.listOfCategoriesToolStripMenuItem.Click += new System.EventHandler(this.listOfCategoriesToolStripMenuItem_Click);
             // 
-            // menuSuppliersLists
+            // productsToolStripMenuItem
             // 
-            this.menuSuppliersLists.Name = "menuSuppliersLists";
-            this.menuSuppliersLists.Size = new System.Drawing.Size(182, 22);
-            this.menuSuppliersLists.Text = "Lista de Proveedores";
+            this.productsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.listOfProductsToolStripMenuItem});
+            this.productsToolStripMenuItem.Name = "productsToolStripMenuItem";
+            this.productsToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.productsToolStripMenuItem.Text = "Products";
+            // 
+            // listOfProductsToolStripMenuItem
+            // 
+            this.listOfProductsToolStripMenuItem.Name = "listOfProductsToolStripMenuItem";
+            this.listOfProductsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.listOfProductsToolStripMenuItem.Text = "List of Products";
+            this.listOfProductsToolStripMenuItem.Click += new System.EventHandler(this.listOfProductsToolStripMenuItem_Click);
             // 
             // FrmMain
             // 
@@ -145,7 +122,7 @@ namespace Lab.Ejercicio004.EF.UI
             this.Controls.Add(this.menuMainForm);
             this.IsMdiContainer = true;
             this.Name = "FrmMain";
-            this.Text = "Sistema de Ventas";
+            this.Text = "Lab.Ejer004";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuMainForm.ResumeLayout(false);
             this.menuMainForm.PerformLayout();
@@ -157,17 +134,15 @@ namespace Lab.Ejercicio004.EF.UI
         #endregion
 
         private System.Windows.Forms.MenuStrip menuMainForm;
-        private System.Windows.Forms.ToolStripMenuItem menuOrders;
-        private System.Windows.Forms.ToolStripMenuItem menuProducts;
-        private System.Windows.Forms.ToolStripMenuItem menuPerson;
-        private System.Windows.Forms.ToolStripMenuItem menuEmployees;
-        private System.Windows.Forms.ToolStripMenuItem menuEmployeesLists;
-        private System.Windows.Forms.ToolStripMenuItem menuClients;
-        private System.Windows.Forms.ToolStripMenuItem menuSuppliers;
-        private System.Windows.Forms.ToolStripMenuItem menuOrdersLists;
         private System.Windows.Forms.ToolStripMenuItem menuProductsLists;
-        private System.Windows.Forms.ToolStripMenuItem menuClientsLists;
-        private System.Windows.Forms.ToolStripMenuItem menuSuppliersLists;
+        private System.Windows.Forms.ToolStripMenuItem listaDeProveedoresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listaDeCategoriasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem suppliersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listOfSuppliersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem categoryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listOfCategoriesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem productsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listOfProductsToolStripMenuItem;
     }
 }
 

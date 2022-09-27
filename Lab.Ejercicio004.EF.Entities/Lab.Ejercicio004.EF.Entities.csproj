@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A9740BC2-3256-44B5-A340-5246FC066555}</ProjectGuid>
+    <ProjectGuid>{5D313B59-D696-4F9D-91BB-20451E5FF4E4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lab.Ejercicio004.EF.Entities</RootNamespace>
@@ -62,6 +62,7 @@
     <Compile Include="Region.cs" />
     <Compile Include="Shippers.cs" />
     <Compile Include="Suppliers.cs" />
+    <Compile Include="sysdiagrams.cs" />
     <Compile Include="Territories.cs" />
   </ItemGroup>
   <ItemGroup>

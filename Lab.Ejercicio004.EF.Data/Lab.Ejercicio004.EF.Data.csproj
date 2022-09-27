@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0D86EC62-D6DF-4387-A6B8-79666848C673}</ProjectGuid>
+    <ProjectGuid>{5B173860-73DE-462B-BBB5-944B10EDCB66}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lab.Ejercicio004.EF.Data</RootNamespace>
@@ -62,7 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lab.Ejercicio004.EF.Entities\Lab.Ejercicio004.EF.Entities.csproj">
-      <Project>{a9740bc2-3256-44b5-a340-5246fc066555}</Project>
+      <Project>{5d313b59-d696-4f9d-91bb-20451e5ff4e4}</Project>
       <Name>Lab.Ejercicio004.EF.Entities</Name>
     </ProjectReference>
   </ItemGroup>

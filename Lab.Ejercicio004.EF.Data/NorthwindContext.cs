@@ -23,6 +23,7 @@ namespace Lab.Ejercicio004.EF.Data
         public virtual DbSet<Region> Region { get; set; }
         public virtual DbSet<Shippers> Shippers { get; set; }
         public virtual DbSet<Suppliers> Suppliers { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Territories> Territories { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
