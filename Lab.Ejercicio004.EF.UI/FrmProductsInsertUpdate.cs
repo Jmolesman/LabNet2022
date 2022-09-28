@@ -137,7 +137,7 @@ namespace Lab.Ejercicio004.EF.UI
             else
             {
                 MessageBox.Show("The product name cant have more than 40 characters or be null, the quantity per unit cant have more than 20 characters" +
-                    " and the unit price has to be blank or be a valid number between", "Error in the supplied data");
+                    " and the unit price has to be blank or be a valid number", "Error in the supplied data");
                 this.DialogResult = DialogResult.None;
             }
 

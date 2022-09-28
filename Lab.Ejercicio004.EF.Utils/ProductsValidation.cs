@@ -52,7 +52,19 @@ namespace Lab.Ejercicio004.EF.Utils
             {
                 return true;
             }
-            return decimal.TryParse(unitPrice, out price);
+            if (unitPrice.Contains("-"))
+            {
+                return false;
+            }
+            try
+            {
+                return decimal.TryParse(unitPrice, out price);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
         }
 
         public static int? ValidateComboBoxNullItem(object oItem)
