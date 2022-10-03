@@ -1,0 +1,63 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+body
+{
+    background-image: url(bg.jpg);
+    background-position: center;
+    background-repeat: repeat;
+}
+.txt_personal_data
+{
+    border-radius: 20px;
+    border:  1px solid whitesmoke ;
+}
+.txt_company_data
+{
+    border-radius: 20px;
+    border:  1px solid whitesmoke ;
+}
+.buttons
+{
+    text-align: center;
+    padding: 5px;
+}
+.submit_button
+{
+    text-align: center;
+}
+.extra_info
+{
+    text-align: center;
+}
+.personal_data
+{
+    text-align: center; 
+}
+#pumpkin_first_name,#pumpkin_last_name
+{
+    width: 20px;
+    height: 20px;
+    position: fixed;
+    visibility: hidden;
+}
+#contact_form
+{
+    width: 800px;
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 20px 0 #999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    position: absolute;
+    font-family: fantasy;
+    color: white;
+}
+.btn-halloween
+{
+    background-color: black !important;
+    color: white;
+    padding: 10px;
+}

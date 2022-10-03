@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 006 Lab .Net - Halloween Party</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        #date_of_birth
+        {
+            width: 30px;
+        }
+
+    </style>
+</head>
+<body>
+    <form action="submit" id="contact_form" style="margin: auto; width: 600px">
+        <h2 style="text-align: center;">ANOTATE A LA PROXIMA FIESTA DE HALLOWEEN</h2>
+        <fieldset>
+            <legend>Información Personal:</legend>
+            <div class = "personal_data">
+                <label for="first_name">Nombre:</label><br>
+                <input class="txt_personal_data" type="text" id="first_name">
+                <img src="pumpkin.png" alt="pumpkin" id="pumpkin_first_name"><br>
+                <label for="last_name">Apellido:</label><br>
+                <input class="txt_personal_data" type="text" id="last_name">
+                <img src="pumpkin.png" alt="pumpkin" id="pumpkin_last_name"><br>
+                <label for="date_of_birth">Edad:</label><br>
+                <input class="txt_personal_data" type="text" id="date_of_birth"><br>
+                <label for="email_field">Email:</label><br>
+                <input class="txt_personal_data" type="text" id="email_field"><br><br>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Información Adicional:</legend>
+            <div class="extra_info">
+                <label for="company_department">Empresa:</label><br>
+                <input class="txt_company_data" type="text" id="company_department"><br><br>
+            </div>
+        </fieldset>
+        <div class="buttons">
+            <input class="btn-halloween" type="button" value="Enviar" onclick="obligatoryFields()">
+            <input class="btn-halloween" type="button" value="Eliminar Valores" onclick="clearDataFields()">
+        </div>
+    </form>
+    <script src="validation.js"></script>
+</body>
+</html>
