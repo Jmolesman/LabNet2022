@@ -13,4 +13,11 @@ namespace Lab.Ejercicio007.MVC.Models
 
         public string Description { get; set; }
     }
+
+    public class CategoriesResponseForProducts
+    {
+        public int CategoryID { get; set; }
+        public string CategoryName { get; set; }
+
+    }
 }

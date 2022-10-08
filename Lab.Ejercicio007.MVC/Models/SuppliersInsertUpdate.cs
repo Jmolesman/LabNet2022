@@ -11,7 +11,7 @@ namespace Lab.Ejercicio007.MVC.Models
         [Key]
         public int SupplierID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The name of the company cannot be null or empty")]
         [StringLength(40,ErrorMessage = "The name of the company cannot have more than 40 characters",MinimumLength = 1)]
         [Display(Name = "Company Name: ")]
         public string CompanyName { get; set; }

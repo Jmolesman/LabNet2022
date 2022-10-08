@@ -12,7 +12,7 @@ namespace Lab.Ejercicio007.MVC.Controllers
 {
     public class CategoriesController : Controller
     {
-        // GET: Categories
+        [HttpGet]
         public ActionResult Index()
         {
             List<CategoriesResponse> newListOfCategories;
@@ -29,35 +29,9 @@ namespace Lab.Ejercicio007.MVC.Controllers
         }
 
         [HttpGet]
-        public ActionResult Insert()
+        public ActionResult InsertOrUpdate(int? id)
         {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Insert(CategoriesInsertUpdate newCategoryInsert)
-        {
-            if (ModelState.IsValid)
-            {
-                Categories oCategory = new Categories
-                {
-                    CategoryName = newCategoryInsert.CategoryName,
-                    Description = newCategoryInsert.Description
-                };
-                CategoriesLogic newCategoriesLogic = new CategoriesLogic();
-                string status = newCategoriesLogic.Add(oCategory);
-                return Redirect("~/Categories/Index");
-            }
-            else
-            {
-                return View(newCategoryInsert);
-            }
-        }
-
-        [HttpGet]
-        public ActionResult Update(int? id)
-        {
-            if (Helpers.IdIsNotNull(id))
+            if (Helpers.IdIsNotNullOrZero(id))
             {
                 CategoriesLogic newCategoriesLogic = new CategoriesLogic();
                 Categories oCategory = newCategoriesLogic.GetEntityByID((int)id);
@@ -71,63 +45,70 @@ namespace Lab.Ejercicio007.MVC.Controllers
             }
             else
             {
-                return Redirect("~/Categories/Index");
+                return View(new CategoriesInsertUpdate());
             }
         }
 
         [HttpPost]
-        public ActionResult Update(CategoriesInsertUpdate newCategoriesUpdate)
+        public ActionResult InsertOrUpdate(CategoriesInsertUpdate newCategory)
         {
-            if (ModelState.IsValid)
+            if (Helpers.IdIsNotNullOrZero(newCategory.CategoryID))
             {
-                Categories oCategory = new Categories
+                if (ModelState.IsValid)
                 {
-                    CategoryID = newCategoriesUpdate.CategoryID,
-                    CategoryName = newCategoriesUpdate.CategoryName,
-                    Description = newCategoriesUpdate.Description
-                };
-                CategoriesLogic newCategoriesLogic = new CategoriesLogic();
-                string status = newCategoriesLogic.Update(oCategory);
-                return Redirect("~/Categories/Index");
+                    Categories oCategory = new Categories
+                    {
+                        CategoryID = newCategory.CategoryID,
+                        CategoryName = newCategory.CategoryName,
+                        Description = newCategory.Description
+                    };
+                    CategoriesLogic newCategoriesLogic = new CategoriesLogic();
+                    string status = newCategoriesLogic.Update(oCategory);
+                    return Redirect("~/Categories/Index");
+                }
+                else
+                {
+                    return View(newCategory);
+                }
             }
             else
             {
-                return View(newCategoriesUpdate);
+                if (ModelState.IsValid)
+                {
+                    Categories oCategory = new Categories
+                    {
+                        CategoryName = newCategory.CategoryName,
+                        Description = newCategory.Description
+                    };
+                    CategoriesLogic newCategoriesLogic = new CategoriesLogic();
+                    string status = newCategoriesLogic.Add(oCategory);
+                    return Redirect("~/Categories/Index");
+                }
+                else
+                {
+                    return View(newCategory);
+                }
             }
         }
 
         public ActionResult Delete(int? id)
         {
-            if (Helpers.IdIsNotNull(id))
+            if (Helpers.IdIsNotNullOrZero(id))
             {
                 CategoriesLogic newCategoriesLogic = new CategoriesLogic();
                 string status = newCategoriesLogic.Del((int)id);
-                //if (status.Contains("conflicted"))
-                //{
-                    
-                //}
 
+                if (status.Contains("conflicted"))
+                {
+                    ProductsLogic productLogic = new ProductsLogic();
+                    status = productLogic.SetCategoryToNull((int)id);
 
-                //    if (result.Contains("conflicted"))
-                //    {
-                //        DialogResult response;
-                //        response = MessageBox.Show("The category you want to delete is actually in use, do you want to delete all the references to this category?", "Category in use", MessageBoxButtons.OKCancel);
-                //        if (response == DialogResult.OK)
-                //        {
-                //            ProductsLogic productLogic = new ProductsLogic();
-                //            result = productLogic.SetCategoryToNull(id);
-                //            if (result.Contains("successfully"))
-                //            {
-                //                MessageBox.Show(_categoriesLogic.Del(id));
-                //            }
-                //        }
-                //    }
-                //    else
-                //    {
-                //        MessageBox.Show(result);
-                //    }
-                //    ShowCategoriesData();
-                    return Content(status);
+                    if (status.Contains("successfully"))
+                    {
+                        status = newCategoriesLogic.Del((int)id);
+                    }
+                }
+                return Content(status);
             }
             else
             {

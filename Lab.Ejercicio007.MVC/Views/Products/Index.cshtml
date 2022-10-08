@@ -7,7 +7,7 @@
 <h2 class="text-center">Product List</h2>
 <div class="row">
     <div class="col-md-12">
-        <input type="button" class="btn btn-success" style="margin-left: 20px;" value="Add New Product" onclick="document.location.href='@Url.Content("~/Products/Insert")'" />
+        <input type="button" class="btn btn-success" style="margin-left: 20px;" value="Add New Product" onclick="document.location.href='@Url.Content("~/Products/InsertOrUpdate/")'" />
     </div>
 </div>
 
@@ -17,11 +17,10 @@
     <table class="table table-bordered table-striped table-responsive">
         <thead>
             <tr>
-                <th class="text-center">Product Name</th>
-                <th class="text-center">Quantity Per Unit</th>
-                <th class="text-center">Unit Price</th>
-                <th class="text-center">Update Product</th>
-                <th class="text-center">Delete Product</th>
+                <th class="text-center text-bg-dark">Product Name</th>
+                <th class="text-center text-bg-dark">Quantity Per Unit</th>
+                <th class="text-center text-bg-dark">Unit Price</th>
+                <th class="text-center text-bg-dark">Operations</th>
             </tr>
         </thead>
         <tbody>
@@ -32,10 +31,8 @@
                     <td>@oProducto.QuantityPerUnit</td>
                     <td>@oProducto.UnitPrice</td>
                     <td class="text-center">
-                        <input onclick="document.location.href = '@Url.Content("~/Products/Update/" + @oProducto.ProductID)'" type="button" value="Update" class="btn btn-secondary" />
-                    </td>
-                    <td class="text-center">
-                        <input onclick="ajaxDeleteRegister(@oProducto.ProductID);" type="submit" value="Delete" class="btn btn-danger" />
+                        <input onclick="document.location.href = '@Url.Content("~/Products/InsertOrUpdate/" + @oProducto.ProductID)'" type="button" value="Update" class="btn btn-secondary" />
+                        <input onclick="ajaxDeleteRegister(@oProducto.ProductID);" style="margin-left: 20px" type="submit" value="Delete" class="btn btn-danger" />
                     </td>
                 </tr>
             }
@@ -43,47 +40,22 @@
     </table>
 </div>
 
-@*Si el codigo no se ejecuta puede ser porque el javascript se este cargando en el bodyrender
-    antes de que se cargue jquery para solucionar esto especificamos que se carque en la seccion scripts
-    envolviendo todos los scripts dentro de llaves*@
 @section scripts {
     <script>
     function ajaxDeleteRegister(id) {
-        if (confirm("Are you sure to delete this record, this process cannot be undone.")) {
+        if (confirm("Are you sure to delete this record?, all data associated with it will be deleted.This process cannot be undone.")) {
             url = "@Url.Content("~/Products/Delete/")" + id;
 
-        /*
-            * Peticion ajax por medio de post, recibe la url y al terminar tiene un callback
-            * una funcion que se se ejecuta posterior a la peticion, esa funcion tiene que tener un atributo
-            * que es lo que te va a regresar internamente al ejecutar el post
-            */
         $.post(url, function (data) {
             if (data == "Product Deleted Successfully") {
                 document.location.href="@Url.Content("/Products")"
             }
             else {
-                alert("An error occurred while deleting the record")
+                alert("The product cannot be removed, it is part of an order.")
             }
         })
         }
     }
-
-
-    @*function ajaxUpdateRegister(id)
-        
-        BUSCAR COMO NAVEGAR A OTRA WEB DESDE AJAX
-        PUSH STATE
-        
-        {
-        url = "@Url.Content("~/Products/Update/")" + id;
-
-            /*
-            * Peticion ajax por medio de post, recibe la url y al terminar tiene un callback
-            * una funcion que se se ejecuta posterior a la peticion, esa funcion tiene que tener un atributo
-            * que es lo que te va a regresar internamente al ejecutar el post
-            */
-        $.(url)
-        }*@
     </script>
 }
 

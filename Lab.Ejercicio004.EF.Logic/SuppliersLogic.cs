@@ -29,9 +29,13 @@ namespace Lab.Ejercicio004.EF.Logic
                 _context.Suppliers.Remove(supplierToDelete);
                 _context.SaveChanges();
             }
-            catch (Exception)
+            catch (System.Data.Entity.Infrastructure.DbUpdateException updateException)
             {
-                return "Error to delete Supplier";
+                return updateException.InnerException.InnerException.Message;
+            }
+            catch (Exception ex)
+            {
+                return $"Error to delete Product {ex.Message} - {ex.GetType()}";
             }
             return "Supplier Deleted Successfully";
         }

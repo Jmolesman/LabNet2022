@@ -6,15 +6,22 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 text-center">
-            <h2>Update a Supplier</h2>
+            @if (Model.SupplierID == 0)
+            {
+                <h2>Insert a new Supplier</h2>
+            }
+            else
+            {
+                <h2>Update a Supplier</h2>
+            }
         </div>
     </div>
     <div class="row" align="center">
-        @using (Html.BeginForm("Update", "Suppliers", FormMethod.Post, new { role = "form", @class = "" }))
+        @using (Html.BeginForm("InsertOrUpdate", "Suppliers", FormMethod.Post, new { role = "form", @class = "" }))
         {
             @Html.AntiForgeryToken()
-
-            @Html.HiddenFor(s => s.SupplierID)
+            
+            @Html.HiddenFor(s=> s.SupplierID)
 
             @Html.LabelFor(s => s.CompanyName)
             @Html.TextBoxFor(s => s.CompanyName, new { @class = "form-control" })

@@ -15,4 +15,10 @@ namespace Lab.Ejercicio007.MVC.Models
 
         public string ContactTitle { get; set; }
     }
+
+    public class SupplierResponseForProducts
+    {
+        public int SupplierID { get; set; }
+        public string CompanyName { get; set; }
+    }
 }

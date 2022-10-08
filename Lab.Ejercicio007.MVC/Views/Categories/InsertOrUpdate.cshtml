@@ -6,11 +6,18 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 text-center">
-            <h2>Update a Category</h2>
+            @if (Model.CategoryID == 0)
+            {
+                <h2>Insert a new Category</h2>
+            }
+            else
+            {
+                <h2>Update a Category</h2>
+            }
         </div>
     </div>
     <div class="row" align="center">
-        @using (Html.BeginForm("Update", "Categories", FormMethod.Post, new { role = "form", @class = "" }))
+        @using (Html.BeginForm("InsertOrUpdate", "Categories", FormMethod.Post, new { role = "form", @class = "" }))
         {
             @Html.AntiForgeryToken()
 

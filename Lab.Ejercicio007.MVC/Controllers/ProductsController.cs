@@ -12,19 +12,17 @@ namespace Lab.Ejercicio007.MVC.Controllers
 {
     public class ProductsController : Controller
     {
-        // GET: Products
+        [HttpGet]
         public ActionResult Index()
         {
 
             List<ProductsResponse> newListOfProducts;
             ProductsLogic newProductLogic = new ProductsLogic();
 
-            newListOfProducts = newProductLogic.GetAll().Select(p => new ProductsResponse
+            newListOfProducts= newProductLogic.GetAll().Select(p => new ProductsResponse
             {
                 ProductID = p.ProductID,
                 ProductName = p.ProductName,
-                SupplierID = p.SupplierID,
-                CategoryID = p.CategoryID,
                 QuantityPerUnit = p.QuantityPerUnit,
                 UnitPrice = p.UnitPrice,
                 UnitsInStock = p.UnitsInStock,
@@ -35,107 +33,89 @@ namespace Lab.Ejercicio007.MVC.Controllers
         }
 
         [HttpGet]
-        public ActionResult Insert()
+        public ActionResult InsertOrUpdate(int? id)
         {
-            return View();
-        }
+            CategoriesLogic newcategoriesLogic = new CategoriesLogic();
+            SuppliersLogic newSuppliersLogic = new SuppliersLogic();
+            ProductsLogic newProductsLogic = new ProductsLogic();
 
-        [HttpPost]
-        public ActionResult Insert(ProductsInsertUpdate newProduct)
-        {
-            if (ModelState.IsValid)
+            if (Helpers.IdIsNotNullOrZero(id))
             {
-                Products oProduct = new Products
-                {
-                    ProductName = newProduct.ProductName,
-                    SupplierID = newProduct.SupplierID,
-                    CategoryID = newProduct.CategoryID,
-                    QuantityPerUnit = newProduct.QuantityPerUnit,
-                    UnitPrice = newProduct.UnitPrice,
-                    UnitsInStock = newProduct.UnitsInStock,
-                    Discontinued = newProduct.Discontinued
-                };
-                ProductsLogic newProductsLogic = new ProductsLogic();
-                string status = newProductsLogic.Add(oProduct);
-                return Redirect("~/Products/Index");
-            }
-            else
-            {
-                return View(newProduct);
-            }
-        }
 
-
-        [HttpGet]
-        public ActionResult Update(int? id)
-        {
-            if (Helpers.IdIsNotNull(id))
-            {
-                ProductsLogic newProductsLogic = new ProductsLogic();
                 Products oProduct = newProductsLogic.GetEntityByID((int)id);
-                ProductsInsertUpdate newProductUpdate = new ProductsInsertUpdate
-                {
-                    ProductID = oProduct.ProductID,
-                    ProductName = oProduct.ProductName,
-                    SupplierID = oProduct.SupplierID,
-                    CategoryID = oProduct.CategoryID,
-                    QuantityPerUnit = oProduct.QuantityPerUnit,
-                    UnitPrice = oProduct.UnitPrice,
-                    UnitsInStock = oProduct.UnitsInStock,
-                    Discontinued = oProduct.Discontinued
-                };
+
+                ProductsInsertUpdate newProductUpdate = new ProductsInsertUpdate();
+
+                newProductUpdate.ProductID = oProduct.ProductID;
+                newProductUpdate.ProductName = oProduct.ProductName;
+                newProductUpdate.QuantityPerUnit = oProduct.QuantityPerUnit;
+                newProductUpdate.UnitPrice = oProduct.UnitPrice;
+                newProductUpdate.UnitsInStock = oProduct.UnitsInStock;
+                newProductUpdate.Discontinued = oProduct.Discontinued;
+
                 return View(newProductUpdate);
             }
             else
             {
-                return Redirect("~/Products/Index");
+                ProductsInsertUpdate newProductInsert = new ProductsInsertUpdate();
+                return View(newProductInsert);
             }
         }
 
         [HttpPost]
-        public ActionResult Update(ProductsInsertUpdate newProductUpdate)
+        public ActionResult InsertOrUpdate(ProductsInsertUpdate newProduct)
         {
-            if (ModelState.IsValid)
+            if (Helpers.IdIsNotNullOrZero(newProduct.ProductID))
             {
-                Products oProduct = new Products
+                if (ModelState.IsValid)
                 {
-                    ProductID = newProductUpdate.ProductID,
-                    ProductName = newProductUpdate.ProductName,
-                    SupplierID = newProductUpdate.SupplierID,
-                    CategoryID = newProductUpdate.CategoryID,
-                    QuantityPerUnit = newProductUpdate.QuantityPerUnit,
-                    UnitPrice = newProductUpdate.UnitPrice,
-                    UnitsInStock = newProductUpdate.UnitsInStock,
-                    Discontinued = newProductUpdate.Discontinued
-                };
-                ProductsLogic newProductsLogic = new ProductsLogic();
-                string status = newProductsLogic.Update(oProduct);
-                return Redirect("~/Products/Index");
+                    Products oProduct = new Products
+                    {
+                        ProductID = newProduct.ProductID,
+                        ProductName = newProduct.ProductName,
+                        QuantityPerUnit = newProduct.QuantityPerUnit,
+                        UnitPrice = newProduct.UnitPrice,
+                        UnitsInStock = newProduct.UnitsInStock,
+                        Discontinued = newProduct.Discontinued
+                    };
+                    ProductsLogic newProductsLogic = new ProductsLogic();
+                    string status = newProductsLogic.Update(oProduct);
+                    return Redirect("~/Products/Index");
+                }
+                else
+                {
+                    return View(newProduct);
+                }
             }
             else
             {
-                return View(newProductUpdate);
+                if (ModelState.IsValid)
+                {
+                    Products oProduct = new Products
+                    {
+                        ProductName = newProduct.ProductName,
+                        QuantityPerUnit = newProduct.QuantityPerUnit,
+                        UnitPrice = newProduct.UnitPrice,
+                        UnitsInStock = newProduct.UnitsInStock,
+                        Discontinued = newProduct.Discontinued
+                    };
+                    ProductsLogic newProductsLogic = new ProductsLogic();
+                    string status = newProductsLogic.Add(oProduct);
+                    return Redirect("~/Products/Index");
+                }
+                else
+                {
+                    return View(newProduct);
+                }
             }
         }
 
         public ActionResult Delete(int? id)
         {
-            if (Helpers.IdIsNotNull(id))
+            if (Helpers.IdIsNotNullOrZero(id))
             {
                 ProductsLogic newProductLogic = new ProductsLogic();
                 string status = newProductLogic.Del((int)id);
-
-
-                if (status.Contains("conflicted"))
-                {
-                    OrderDetailsLogic newOrderDetailsLogic = new OrderDetailsLogic();
-                    status = newOrderDetailsLogic.DeleteProductIDFromOrder((int)id);
-
-                    if (status.Contains("successfully"))
-                    {
-                        status = newProductLogic.Del((int)id);
-                    }
-                }
                 return Content(status);
             }
             else

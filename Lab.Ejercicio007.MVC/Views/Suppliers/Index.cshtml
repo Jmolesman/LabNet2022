@@ -5,7 +5,7 @@
 <h2 class="text-center">Supplier List</h2>
 <div class="row">
     <div class="col-md-12">
-        <input type="button" class="btn btn-success" style="margin-left: 20px;" value="Add New Supplier" onclick="document.location.href='@Url.Content("~/Categories/Insert")'" />
+        <input type="button" class="btn btn-success" style="margin-left: 20px;" value="Add New Supplier" onclick="document.location.href='@Url.Content("~/Suppliers/InsertOrUpdate/")'" />
     </div>
 </div>
 
@@ -15,11 +15,10 @@
     <table class="table table-bordered table-striped table-responsive">
         <thead>
             <tr>
-                <th class="text-center">Company Name</th>
-                <th class="text-center">Contact Name</th>
-                <th class="text-center">Contact Title</th>
-                <th class="text-center">Update Supplier</th>
-                <th class="text-center">Delete Supplier</th>
+                <th class="text-center text-bg-dark">Company Name</th>
+                <th class="text-center text-bg-dark">Contact Name</th>
+                <th class="text-center text-bg-dark">Contact Title</th>
+                <th class="text-center text-bg-dark">Operations</th>
             </tr>
         </thead>
         <tbody>
@@ -30,10 +29,8 @@
                     <td>@oSupplier.ContactName</td>
                     <td>@oSupplier.ContactTitle</td>
                     <td class="text-center">
-                        <input onclick="document.location.href = '@Url.Content("~/Suppliers/Update/" + @oSupplier.SupplierID)'" type="button" value="Update" class="btn btn-secondary" />
-                    </td>
-                    <td class="text-center">
-                        <input onclick="document.location.href = '@Url.Content("~/Suppliers/Delete/" + @oSupplier.SupplierID)'" type="button" value="Delete" class="btn btn-danger" />
+                        <input onclick="document.location.href = '@Url.Content("~/Suppliers/InsertOrUpdate/" + @oSupplier.SupplierID)'" type="button" value="Update" class="btn btn-secondary" />
+                        <input onclick="ajaxDeleteRegister(@oSupplier.SupplierID)" style="margin-left: 20px" type="button" value="Delete" class="btn btn-danger" />
                     </td>
                 </tr>
             }
@@ -41,4 +38,22 @@
     </table>
 </div>
 
+@section scripts {
+    <script>
+    function ajaxDeleteRegister(id) {
+        if (confirm("Are you sure to delete this record?, all data associated with it will be deleted.This process cannot be undone.")) {
+            url = "@Url.Content("~/Suppliers/Delete/")" + id;
+
+        $.post(url, function (data) {
+            if (data == "Supplier Deleted Successfully") {
+                document.location.href="@Url.Content("/Suppliers")"
+            }
+            else {
+                alert("An error occurred while deleting the record")
+            }
+        })
+        }
+    }
+    </script>
+}
 

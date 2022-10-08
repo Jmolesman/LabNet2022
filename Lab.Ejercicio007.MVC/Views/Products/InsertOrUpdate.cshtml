@@ -6,20 +6,26 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 text-center">
-            <h2>Insert a new Product</h2>
+            @if (Model.ProductID == 0)
+            {
+                <h2>Insert a new Product</h2>
+            }
+            else
+            {
+                <h2>Update a Product</h2>
+            }
         </div>
     </div>
     <div class="row" align="center">
-        @using (Html.BeginForm("Insert", "Products", FormMethod.Post, new { role = "form", @class = "" }))
+        @using (Html.BeginForm("InsertOrUpdate", "Products", FormMethod.Post, new { role = "form", @class = "" }))
         {
             @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(p => p.ProductID)
 
             @Html.LabelFor(p => p.ProductName)
             @Html.TextBoxFor(p => p.ProductName, new { @class = "form-control" })
             @Html.ValidationMessage("ProductName", new { @class = "text-danger" })<br />
-
-            @Html.LabelFor(p => p.CategoryID)
-            @Html.TextBoxFor(p => p.CategoryID, new { @class = "form-control" })<br />
 
             @Html.LabelFor(p => p.QuantityPerUnit)
             @Html.TextBoxFor(p => p.QuantityPerUnit, new { @class = "form-control" })
@@ -30,10 +36,6 @@
 
             @Html.LabelFor(p => p.UnitsInStock)
             @Html.TextBoxFor(p => p.UnitsInStock, new { @class = "form-control" })<br />
-
-            @Html.LabelFor(p => p.SupplierID)
-            @Html.TextBoxFor(p => p.SupplierID, new { @class = "form-control" }) <br />
-
 
             @Html.CheckBoxFor(p => p.Discontinued, new { @class = "" })
             @Html.LabelFor(p => p.Discontinued)<br />

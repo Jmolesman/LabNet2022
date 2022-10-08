@@ -7,7 +7,7 @@
 <h2 class="text-center">Category List</h2>
 <div class="row">
     <div class="col-md-12">
-        <input type="button" class="btn btn-success" style="margin-left: 20px;" value="Add New Category" onclick="document.location.href='@Url.Content("~/Categories/Insert")'" />
+        <input type="button" class="btn btn-success" style="margin-left: 20px;" value="Add New Category" onclick="document.location.href='@Url.Content("~/Categories/InsertOrUpdate/")'" />
     </div>
 </div>
 
@@ -17,10 +17,9 @@
     <table class="table table-bordered table-striped table-responsive">
         <thead>
             <tr>
-                <th class="text-center">Category Name</th>
-                <th class="text-center">Category Description</th>
-                <th class="text-center">Update Category</th>
-                <th class="text-center">Delete Category</th>
+                <th class="text-center text-bg-dark">Category Name</th>
+                <th class="text-center text-bg-dark">Category Description</th>
+                <th class="text-center text-bg-dark">Operations</th>
             </tr>
         </thead>
         <tbody>
@@ -30,14 +29,29 @@
                     <td>@oCategory.CategoryName</td>
                     <td>@oCategory.Description</td>
                     <td class="text-center">
-                        <input onclick="document.location.href = '@Url.Content("~/Categories/Update/" + oCategory.CategoryID)'" type="button" value="Update" class="btn btn-secondary" />
-                    </td>
-                    <td class="text-center">
-                        <input onclick="document.location.href = '@Url.Content("~/Categories/Delete/" + oCategory.CategoryID)'" type="button" value="Delete" class="btn btn-danger" />
+                        <input onclick="document.location.href = '@Url.Content("~/Categories/InsertOrUpdate/" + oCategory.CategoryID)'" type="button" value="Update" class="btn btn-secondary" />
+                        <input onclick="ajaxDeleteRegister(@oCategory.CategoryID)" style="margin-left: 20px" type="button" value="Delete" class="btn btn-danger" />
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+@section scripts {
+    <script>
+    function ajaxDeleteRegister(id) {
+        if (confirm("Are you sure to delete this record?, all data associated with it will be deleted.This process cannot be undone.")) {
+            url = "@Url.Content("~/Categories/Delete/")" + id;
 
+        $.post(url, function (data) {
+            if (data == "Category Deleted Successfully") {
+                document.location.href="@Url.Content("/Categories")"
+            }
+            else {
+                alert("An error occurred while deleting the record")
+            }
+        })
+        }
+    }
+    </script>
+    }

@@ -12,7 +12,7 @@ namespace Lab.Ejercicio007.MVC.Controllers
 {
     public class SuppliersController : Controller
     {
-        // GET: Suppliers
+        [HttpGet]
         public ActionResult Index()
         {
             List<SuppliersResponse> newListOfSuppliers;
@@ -30,36 +30,9 @@ namespace Lab.Ejercicio007.MVC.Controllers
         }
 
         [HttpGet]
-        public ActionResult Insert()
+        public ActionResult InsertOrUpdate(int? id)
         {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Insert(SuppliersInsertUpdate newSuppliersInsert)
-        {
-            if (ModelState.IsValid)
-            {
-                Suppliers oSupplier = new Suppliers
-                {
-                    CompanyName = newSuppliersInsert.CompanyName,
-                    ContactName = newSuppliersInsert.ContactName,
-                    ContactTitle = newSuppliersInsert.ContactTitle
-                };
-                SuppliersLogic newSuppliersLogic = new SuppliersLogic();
-                string status = newSuppliersLogic.Add(oSupplier);
-                return Redirect("~/Suppliers/Index");
-            }
-            else
-            {
-                return View(newSuppliersInsert);
-            }
-        }
-
-        [HttpGet]
-        public ActionResult Update(int? id)
-        {
-            if (Helpers.IdIsNotNull(id))
+            if (Helpers.IdIsNotNullOrZero(id))
             {
                 SuppliersLogic newSuppliersLogic = new SuppliersLogic();
                 Suppliers oSupplier = newSuppliersLogic.GetEntityByID((int)id);
@@ -76,39 +49,72 @@ namespace Lab.Ejercicio007.MVC.Controllers
             }
             else
             {
-                return Redirect("~/Suppliers/Index");
+                return View(new SuppliersInsertUpdate());
             }
         }
 
         [HttpPost]
-        public ActionResult Update(SuppliersInsertUpdate newSupplierUpdate)
+        public ActionResult InsertOrUpdate(SuppliersInsertUpdate newSupplier)
         {
-            if (ModelState.IsValid)
+            if (Helpers.IdIsNotNullOrZero(newSupplier.SupplierID))
             {
-                Suppliers oSupplier = new Suppliers
+                if (ModelState.IsValid)
                 {
-                    SupplierID = newSupplierUpdate.SupplierID,
-                    CompanyName = newSupplierUpdate.CompanyName,
-                    ContactName = newSupplierUpdate.ContactName,
-                    ContactTitle = newSupplierUpdate.ContactTitle
-                };
-                SuppliersLogic newSuppliersLogic = new SuppliersLogic();
-                string status = newSuppliersLogic.Update(oSupplier);
+                    Suppliers oSupplier = new Suppliers
+                    {
+                        SupplierID = newSupplier.SupplierID,
+                        CompanyName = newSupplier.CompanyName,
+                        ContactName = newSupplier.ContactName,
+                        ContactTitle = newSupplier.ContactTitle
+                    };
+                    SuppliersLogic newSuppliersLogic = new SuppliersLogic();
+                    string status = newSuppliersLogic.Update(oSupplier);
 
-                return Redirect("~/Suppliers/Index");
+                    return Redirect("~/Suppliers/Index");
+                }
+                else
+                {
+                    return View(newSupplier);
+                }
             }
             else
             {
-                return View(newSupplierUpdate);
+                if (ModelState.IsValid)
+                {
+                    Suppliers oSupplier = new Suppliers
+                    {
+                        CompanyName = newSupplier.CompanyName,
+                        ContactName = newSupplier.ContactName,
+                        ContactTitle = newSupplier.ContactTitle
+                    };
+                    SuppliersLogic newSuppliersLogic = new SuppliersLogic();
+                    string status = newSuppliersLogic.Add(oSupplier);
+                    return Redirect("~/Suppliers/Index");
+                }
+                else
+                {
+                    return View(newSupplier);
+                }
             }
         }
 
         public ActionResult Delete(int? id)
         {
-            if (Helpers.IdIsNotNull(id))
+            if (Helpers.IdIsNotNullOrZero(id))
             {
                 SuppliersLogic newSuppliersLogic = new SuppliersLogic();
                 string status = newSuppliersLogic.Del((int)id);
+
+                if (status.Contains("conflicted"))
+                {
+                    ProductsLogic productLogic = new ProductsLogic();
+                    status = productLogic.SetSupplierToNull((int)id);
+
+                    if (status.Contains("successfully"))
+                    {
+                        status = newSuppliersLogic.Del((int)id);
+                    }
+                }
                 return Content(status);
             }
             else
