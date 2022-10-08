@@ -2,10 +2,14 @@
 @{
     ViewBag.Title = "Supplier";
 }
-
 <h2 class="text-center">Supplier List</h2>
+<div class="row">
+    <div class="col-md-12">
+        <input type="button" class="btn btn-success" style="margin-left: 20px;" value="Add New Supplier" onclick="document.location.href='@Url.Content("~/Categories/Insert")'" />
+    </div>
+</div>
 
-<input type="button" class="btn btn-success" value="Add New Supplier" onclick="document.location.href='@Url.Content("~/Categories/Insert")'" />
+<br />
 
 <div class="container">
     <table class="table table-bordered table-striped table-responsive">
@@ -14,22 +18,24 @@
                 <th class="text-center">Company Name</th>
                 <th class="text-center">Contact Name</th>
                 <th class="text-center">Contact Title</th>
+                <th class="text-center">Update Supplier</th>
+                <th class="text-center">Delete Supplier</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var oSupplier in Model)
             {
-            <tr>
-                <td>@oSupplier.CompanyName</td>
-                <td>@oSupplier.ContactName</td>
-                <td>@oSupplier.ContactTitle</td>
-                <td class="text-center">
-                    <input onclick="ajaxUpdateRegister(@oSupplier.SupplierID)" type="button" value="Update" class="btn btn-default" />
-                </td>
-                <td class="text-center">
-                    <input onclick="ajaxDeleteRegister(@oSupplier.SupplierID)" type="button" value="Delete" class="btn btn-danger" />
-                </td>
-            </tr>
+                <tr>
+                    <td>@oSupplier.CompanyName</td>
+                    <td>@oSupplier.ContactName</td>
+                    <td>@oSupplier.ContactTitle</td>
+                    <td class="text-center">
+                        <input onclick="document.location.href = '@Url.Content("~/Suppliers/Update/" + @oSupplier.SupplierID)'" type="button" value="Update" class="btn btn-secondary" />
+                    </td>
+                    <td class="text-center">
+                        <input onclick="document.location.href = '@Url.Content("~/Suppliers/Delete/" + @oSupplier.SupplierID)'" type="button" value="Delete" class="btn btn-danger" />
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

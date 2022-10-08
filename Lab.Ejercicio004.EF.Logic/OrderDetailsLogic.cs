@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Lab.Ejercicio004.EF.Logic
 {
-    class OrderDetailsLogic : BaseLogic<Order_Details>
+    public class OrderDetailsLogic : BaseLogic<Order_Details>
     {
         public override string Add(Order_Details itemToAdd)
         {
@@ -16,7 +16,21 @@ namespace Lab.Ejercicio004.EF.Logic
 
         public override string Del(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Order_Details orderToDelete = _context.Order_Details.Find(id);
+                _context.Order_Details.Remove(orderToDelete);
+                _context.SaveChanges();
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException updateException)
+            {
+                return updateException.InnerException.InnerException.Message;
+            }
+            catch (Exception ex)
+            {
+                return $"Error to delete Order ID {ex.Message} - {ex.GetType()}";
+            }
+            return "The Order Detail is Successfully deleted";
         }
 
         public override List<Order_Details> GetAll()
@@ -40,17 +54,27 @@ namespace Lab.Ejercicio004.EF.Logic
 
         public override string Update(Order_Details itemToChange)
         {
+            throw new NotImplementedException();
+        }
+
+        public string DeleteProductIDFromOrder(int id)
+        {
             try
             {
-                var orderDetailToUpdate = _context.Order_Details.Find(itemToChange.OrderID);
-                _context.Entry(orderDetailToUpdate).CurrentValues.SetValues(itemToChange);
-                _context.SaveChanges();
+                var lst = GetAll();
+                foreach (var item in lst)
+                {
+                    if (item.ProductID == id)
+                    {
+                        Del(item.OrderID);
+                    }
+                }
             }
             catch (Exception ex)
             {
-                return $"Error to update order detail {ex.Message}";
+                return $"Error to delete fk of order details {ex.Message}";
             }
-            return "All data modify successfully";
+            return $"The selected product id: {id} is successfully deleted from orders details";
         }
     }
 }

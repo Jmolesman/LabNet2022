@@ -86,6 +86,8 @@ namespace Lab.Ejercicio007.MVC.Controllers
                     CategoryName = newCategoriesUpdate.CategoryName,
                     Description = newCategoriesUpdate.Description
                 };
+                CategoriesLogic newCategoriesLogic = new CategoriesLogic();
+                string status = newCategoriesLogic.Update(oCategory);
                 return Redirect("~/Categories/Index");
             }
             else
@@ -100,7 +102,32 @@ namespace Lab.Ejercicio007.MVC.Controllers
             {
                 CategoriesLogic newCategoriesLogic = new CategoriesLogic();
                 string status = newCategoriesLogic.Del((int)id);
-                return Content(status);
+                //if (status.Contains("conflicted"))
+                //{
+                    
+                //}
+
+
+                //    if (result.Contains("conflicted"))
+                //    {
+                //        DialogResult response;
+                //        response = MessageBox.Show("The category you want to delete is actually in use, do you want to delete all the references to this category?", "Category in use", MessageBoxButtons.OKCancel);
+                //        if (response == DialogResult.OK)
+                //        {
+                //            ProductsLogic productLogic = new ProductsLogic();
+                //            result = productLogic.SetCategoryToNull(id);
+                //            if (result.Contains("successfully"))
+                //            {
+                //                MessageBox.Show(_categoriesLogic.Del(id));
+                //            }
+                //        }
+                //    }
+                //    else
+                //    {
+                //        MessageBox.Show(result);
+                //    }
+                //    ShowCategoriesData();
+                    return Content(status);
             }
             else
             {

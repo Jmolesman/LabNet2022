@@ -124,13 +124,24 @@ namespace Lab.Ejercicio007.MVC.Controllers
             {
                 ProductsLogic newProductLogic = new ProductsLogic();
                 string status = newProductLogic.Del((int)id);
+
+
+                if (status.Contains("conflicted"))
+                {
+                    OrderDetailsLogic newOrderDetailsLogic = new OrderDetailsLogic();
+                    status = newOrderDetailsLogic.DeleteProductIDFromOrder((int)id);
+
+                    if (status.Contains("successfully"))
+                    {
+                        status = newProductLogic.Del((int)id);
+                    }
+                }
                 return Content(status);
             }
             else
             {
-                return Redirect("~/Products/Index");
+                return View();
             }
         }
-
     }
 }

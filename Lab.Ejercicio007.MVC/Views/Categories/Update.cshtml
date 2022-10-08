@@ -1,7 +1,30 @@
-﻿
+﻿@model Lab.Ejercicio007.MVC.Models.CategoriesInsertUpdate
 @{
-    ViewBag.Title = "Update";
+    ViewBag.Title = "Categories";
 }
 
-<h2>Update</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h2>Update a Category</h2>
+        </div>
+    </div>
+    <div class="row" align="center">
+        @using (Html.BeginForm("Update", "Categories", FormMethod.Post, new { role = "form", @class = "" }))
+        {
+            @Html.AntiForgeryToken()
 
+            @Html.HiddenFor(c => c.CategoryID)
+
+            @Html.LabelFor(c => c.CategoryName)
+            @Html.TextBoxFor(c => c.CategoryName, new { @class = "form-control" })
+            @Html.ValidationMessage("CategoryName", new { @class = "text-danger" })<br />
+
+            @Html.LabelFor(c => c.Description)
+            @Html.TextBoxFor(c => c.Description, new { @class = "form-control" })<br />
+            @Html.ValidationMessage("Description", new { @class = "text-danger" })<br />
+
+            <input type="submit" class="btn btn-success" value="Save" />
+        }
+    </div>
+</div>

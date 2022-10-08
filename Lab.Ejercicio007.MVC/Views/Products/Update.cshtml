@@ -1,6 +1,6 @@
 ﻿@model Lab.Ejercicio007.MVC.Models.ProductsInsertUpdate
 @{
-    ViewBag.Title = "Update Product";
+    ViewBag.Title = "Product";
 }
 
 <div class="container">
@@ -36,7 +36,9 @@
             @Html.TextBoxFor(p => p.SupplierID, new { @class = "form-control" }) <br />
 
             @Html.LabelFor(p => p.Discontinued)
-            @Html.CheckBoxFor(p => p.Discontinued, new { @class = "form-control" }) <br />
+            <p>
+                @Html.CheckBoxFor(p => p.Discontinued, new { @class = "" })
+            </p>
 
             <input type="submit" class="btn btn-success" value="Save" />
         }

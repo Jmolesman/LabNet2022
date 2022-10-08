@@ -1,7 +1,34 @@
-﻿
+﻿@model Lab.Ejercicio007.MVC.Models.SuppliersInsertUpdate
 @{
-    ViewBag.Title = "Update";
+    ViewBag.Title = "Suppliers";
 }
 
-<h2>Update</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h2>Update a Supplier</h2>
+        </div>
+    </div>
+    <div class="row" align="center">
+        @using (Html.BeginForm("Update", "Suppliers", FormMethod.Post, new { role = "form", @class = "" }))
+        {
+            @Html.AntiForgeryToken()
 
+            @Html.HiddenFor(s => s.SupplierID)
+
+            @Html.LabelFor(s => s.CompanyName)
+            @Html.TextBoxFor(s => s.CompanyName, new { @class = "form-control" })
+            @Html.ValidationMessage("CompanyName", new { @class = "text-danger" })<br />
+
+            @Html.LabelFor(s => s.ContactName)
+            @Html.TextBoxFor(s => s.ContactName, new { @class = "form-control" })
+            @Html.ValidationMessage("ContactName", new { @class = "text-danger" })<br />
+
+            @Html.LabelFor(s => s.ContactTitle)
+            @Html.TextBoxFor(s => s.ContactTitle, new { @class = "form-control" })
+            @Html.ValidationMessage("ContactTitle", new { @class = "text-danger" })<br />
+
+            <input type="submit" class="btn btn-success" value="Save" />
+        }
+    </div>
+</div>

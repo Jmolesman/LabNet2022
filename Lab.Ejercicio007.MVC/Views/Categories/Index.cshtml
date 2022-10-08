@@ -5,8 +5,13 @@
 }
 
 <h2 class="text-center">Category List</h2>
+<div class="row">
+    <div class="col-md-12">
+        <input type="button" class="btn btn-success" style="margin-left: 20px;" value="Add New Category" onclick="document.location.href='@Url.Content("~/Categories/Insert")'" />
+    </div>
+</div>
 
-<input type="button" class="btn btn-success" value="Add New Category" onclick="document.location.href='@Url.Content("~/Categories/Insert")'"/>
+<br />
 
 <div class="container">
     <table class="table table-bordered table-striped table-responsive">
@@ -14,21 +19,23 @@
             <tr>
                 <th class="text-center">Category Name</th>
                 <th class="text-center">Category Description</th>
+                <th class="text-center">Update Category</th>
+                <th class="text-center">Delete Category</th>
             </tr>
         </thead>
-        <tbody >
+        <tbody>
             @foreach (var oCategory in Model)
             {
-            <tr>
-                <td>@oCategory.CategoryName</td>
-                <td>@oCategory.Description</td>
-                <td class="text-center">
-                    <input onclick="ajaxUpdateRegister(@oCategory.CategoryID)" type="button" value="Update" class="btn btn-default"/>
-                </td>
-                <td class="text-center">
-                    <input onclick="ajaxDeleteRegister(@oCategory.CategoryID)" type="button" value="Delete" class="btn btn-danger" />
-                </td>
-            </tr>
+                <tr>
+                    <td>@oCategory.CategoryName</td>
+                    <td>@oCategory.Description</td>
+                    <td class="text-center">
+                        <input onclick="document.location.href = '@Url.Content("~/Categories/Update/" + oCategory.CategoryID)'" type="button" value="Update" class="btn btn-secondary" />
+                    </td>
+                    <td class="text-center">
+                        <input onclick="document.location.href = '@Url.Content("~/Categories/Delete/" + oCategory.CategoryID)'" type="button" value="Delete" class="btn btn-danger" />
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
