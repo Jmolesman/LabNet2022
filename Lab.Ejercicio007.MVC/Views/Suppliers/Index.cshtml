@@ -1,0 +1,38 @@
+﻿@model List<Lab.Ejercicio007.MVC.Models.SuppliersResponse>
+@{
+    ViewBag.Title = "Supplier";
+}
+
+<h2 class="text-center">Supplier List</h2>
+
+<input type="button" class="btn btn-success" value="Add New Supplier" onclick="document.location.href='@Url.Content("~/Categories/Insert")'" />
+
+<div class="container">
+    <table class="table table-bordered table-striped table-responsive">
+        <thead>
+            <tr>
+                <th class="text-center">Company Name</th>
+                <th class="text-center">Contact Name</th>
+                <th class="text-center">Contact Title</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var oSupplier in Model)
+            {
+            <tr>
+                <td>@oSupplier.CompanyName</td>
+                <td>@oSupplier.ContactName</td>
+                <td>@oSupplier.ContactTitle</td>
+                <td class="text-center">
+                    <input onclick="ajaxUpdateRegister(@oSupplier.SupplierID)" type="button" value="Update" class="btn btn-default" />
+                </td>
+                <td class="text-center">
+                    <input onclick="ajaxDeleteRegister(@oSupplier.SupplierID)" type="button" value="Delete" class="btn btn-danger" />
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

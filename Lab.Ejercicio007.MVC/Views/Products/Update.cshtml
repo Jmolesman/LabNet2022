@@ -1,0 +1,44 @@
+﻿@model Lab.Ejercicio007.MVC.Models.ProductsInsertUpdate
+@{
+    ViewBag.Title = "Update Product";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h2>Modify a existing Product</h2>
+        </div>
+    </div>
+    <div class="row" align="center">
+        @using (Html.BeginForm("Update", "Products", FormMethod.Post, new { role = "form", @class = "" }))
+        {
+            @Html.AntiForgeryToken()
+            
+            @Html.HiddenFor(p => p.ProductID)
+            @Html.LabelFor(p => p.ProductName)
+            @Html.TextBoxFor(p => p.ProductName, new { @class = "form-control" })
+            @Html.ValidationMessage("ProductName", new { @class = "text-danger" })<br />
+
+            @Html.LabelFor(p => p.CategoryID)
+            @Html.TextBoxFor(p => p.CategoryID, new { @class = "form-control" })<br />
+
+            @Html.LabelFor(p => p.QuantityPerUnit)
+            @Html.TextBoxFor(p => p.QuantityPerUnit, new { @class = "form-control" })
+            @Html.ValidationMessage("QuantityPerUnit", new { @class = "text-danger" })<br />
+
+            @Html.LabelFor(p => p.UnitPrice)
+            @Html.TextBoxFor(p => p.UnitPrice, new { @class = "form-control" })<br />
+
+            @Html.LabelFor(p => p.UnitsInStock)
+            @Html.TextBoxFor(p => p.UnitsInStock, new { @class = "form-control" })<br />
+
+            @Html.LabelFor(p => p.SupplierID)
+            @Html.TextBoxFor(p => p.SupplierID, new { @class = "form-control" }) <br />
+
+            @Html.LabelFor(p => p.Discontinued)
+            @Html.CheckBoxFor(p => p.Discontinued, new { @class = "form-control" }) <br />
+
+            <input type="submit" class="btn btn-success" value="Save" />
+        }
+    </div>
+</div>

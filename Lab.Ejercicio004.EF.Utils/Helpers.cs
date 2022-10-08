@@ -20,5 +20,7 @@ namespace Lab.Ejercicio004.EF.Utils
         {
             return id == -1 ? false: true;
         }
+
+        public static bool IdIsNotNull(int? id) => id != null ? true : false;
     }
 }

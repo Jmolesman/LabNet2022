@@ -1,0 +1,36 @@
+﻿@model List<Lab.Ejercicio007.MVC.Models.CategoriesResponse>
+
+@{
+    ViewBag.Title = "Categories";
+}
+
+<h2 class="text-center">Category List</h2>
+
+<input type="button" class="btn btn-success" value="Add New Category" onclick="document.location.href='@Url.Content("~/Categories/Insert")'"/>
+
+<div class="container">
+    <table class="table table-bordered table-striped table-responsive">
+        <thead>
+            <tr>
+                <th class="text-center">Category Name</th>
+                <th class="text-center">Category Description</th>
+            </tr>
+        </thead>
+        <tbody >
+            @foreach (var oCategory in Model)
+            {
+            <tr>
+                <td>@oCategory.CategoryName</td>
+                <td>@oCategory.Description</td>
+                <td class="text-center">
+                    <input onclick="ajaxUpdateRegister(@oCategory.CategoryID)" type="button" value="Update" class="btn btn-default"/>
+                </td>
+                <td class="text-center">
+                    <input onclick="ajaxDeleteRegister(@oCategory.CategoryID)" type="button" value="Delete" class="btn btn-danger" />
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

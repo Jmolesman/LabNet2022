@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Trabajo 008 Lab .Net</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-collapse fixed-top">
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                <ul class="navbar-nav ms-auto me-auto">
+                    <li class="nav-link">
+                        @Html.ActionLink("Products", "Index", "Products")
+                    </li>
+                    <li class="nav-link">
+                        @Html.ActionLink("Categories", "Index", "Categories")
+                    </li>
+                    <li class="nav-link">
+                        @Html.ActionLink("Suppliers", "Index", "Suppliers")
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; 2022 - @DateTime.Now.Year TP008 Lab .Net</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
