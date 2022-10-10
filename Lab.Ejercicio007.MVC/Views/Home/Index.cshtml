@@ -1,0 +1,19 @@
+﻿@model Lab.Ejercicio007.MVC.Models.QuoteFetch
+@{
+    ViewBag.Title = "Random Quote";
+}
+
+<div class="container">
+    <div class="col-md-12 text-center" align="center">
+        <h2>@Model.Content</h2>
+        <b style="width:300px;" align="center">
+            @Model.Author
+        </b>
+    </div>
+    <br />  
+    <div class="row justify-content-center" align="center">
+        <input type="button" class="btn btn-primary" style="width: 200px;" align="center" value="Get Random Quote" onclick="document.location.href = '@Url.Content("~/Home/Index")'" />
+    </div>
+</div>
+
+
