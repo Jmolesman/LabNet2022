@@ -271,6 +271,10 @@
       <Project>{E447D2A1-ADDE-4E23-B6DF-15FE97EB9285}</Project>
       <Name>Lab.Ejercicio004.EF.Logic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lab.Ejercicio004.EF.Utils\Lab.Ejercicio004.EF.Utils.csproj">
+      <Project>{87469680-03A2-4381-A8CA-B398B42BAA01}</Project>
+      <Name>Lab.Ejercicio004.EF.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

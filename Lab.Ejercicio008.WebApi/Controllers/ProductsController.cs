@@ -11,9 +11,9 @@ namespace Lab.Ejercicio008.WebApi.Controllers
 {
     public class ProductsController : ApiController
     {
-        //GET: /api/Products
+        //GET: /api/Products/GetAll
         [HttpGet]
-        public IHttpActionResult GetAllProducts()
+        public IHttpActionResult GetAll()
         {
             try
             {
@@ -32,15 +32,19 @@ namespace Lab.Ejercicio008.WebApi.Controllers
 
                 return Ok(listOfProductsViewModel);
             }
+            catch (NullReferenceException)
+            {
+                return Content(HttpStatusCode.NotFound, "Error getting list of products");
+            }
             catch (Exception ex)
             {
                 return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
 
-        //GET: /api/Products/{id}
+        //GET: /api/Products/Get/{id}
         [HttpGet]
-        public IHttpActionResult GetProduct(int id)
+        public IHttpActionResult Get(int id)
         {
             try
             {
@@ -75,9 +79,9 @@ namespace Lab.Ejercicio008.WebApi.Controllers
             }
         }
 
-        //POST: /api/Products
+        //POST: /api/Products/Add
         [HttpPost]
-        public IHttpActionResult AddProduct([FromBody] ProductsViewModel newProduct)
+        public IHttpActionResult Add([FromBody] ProductsViewModel newProduct)
         {
             try
             {
@@ -93,11 +97,14 @@ namespace Lab.Ejercicio008.WebApi.Controllers
                 };
                 ProductsLogic newLogic = new ProductsLogic();
                 string status = newLogic.Add(oProduct);
-                if (status.Contains("Error"))
+                if (status.Contains("successfully"))
                 {
-                    return Content(HttpStatusCode.BadRequest, "There are errors in the data provided");
+                    return Content(HttpStatusCode.Created, status);
                 }
-                return Content(HttpStatusCode.Created, oProduct);
+                else
+                {
+                    return Content(HttpStatusCode.BadRequest,status);
+                }
             }
             catch (Exception ex)
             {
@@ -105,9 +112,9 @@ namespace Lab.Ejercicio008.WebApi.Controllers
             }
         }
 
-        //PUT: /api/Products/
+        //PUT: /api/Products/Update
         [HttpPut]
-        public IHttpActionResult EditProduct([FromBody] ProductsViewModel productUpdate)
+        public IHttpActionResult Update([FromBody] ProductsViewModel productUpdate)
         {
             try
             {
@@ -124,11 +131,14 @@ namespace Lab.Ejercicio008.WebApi.Controllers
                 };
                 ProductsLogic newLogic = new ProductsLogic();
                 string status = newLogic.Update(oProduct);
-                if (status.Contains("Error"))
+                if (status.Contains("successfully"))
                 {
-                    return Content(HttpStatusCode.BadRequest, "There are errors in the data provided");
+                    return Content(HttpStatusCode.OK, status);
                 }
-                return Content(HttpStatusCode.Created, oProduct);
+                else
+                {
+                    return Content(HttpStatusCode.BadRequest, status);
+                }
             }
             catch (Exception ex)
             {
@@ -136,23 +146,22 @@ namespace Lab.Ejercicio008.WebApi.Controllers
             }
         }
 
-        //POST: /api/Products/{id}
+        //POST: /api/Products/Del/{id}
         [HttpPost]
-        public IHttpActionResult DelProducts(int id)
+        public IHttpActionResult Del(int id)
         {
             try
             {
                 ProductsLogic newLogic = new ProductsLogic();
                 string status = newLogic.Del(id);
-                if (status.Contains("Error"))
+                if (status.Contains("successfully"))
                 {
-                    return Content(HttpStatusCode.BadRequest, $"The product you want to delete does not exist {id}");
+                    return Content(HttpStatusCode.OK, status);
                 }
-                if (status.Contains("conflicted"))
+                else
                 {
-                    return Content(HttpStatusCode.BadRequest, $"The product you want to delete is related to another table");
+                    return Content(HttpStatusCode.BadRequest, status);
                 }
-                return Content(HttpStatusCode.OK, $"Deleted product with ID: {id}");
             }
             catch (Exception ex)
             {

@@ -13,9 +13,9 @@ namespace Lab.Ejercicio008.WebApi.Controllers
 {
     public class SuppliersController : ApiController
     {
-        //GET: /api/Suppliers
+        //GET: /api/Suppliers/GetAll
         [HttpGet]
-        public IHttpActionResult GetAllSuppliers()
+        public IHttpActionResult GetAll()
         {
             try
             {
@@ -30,15 +30,19 @@ namespace Lab.Ejercicio008.WebApi.Controllers
 
                 return Ok(listOfSuppliersViewModel);
             }
+            catch (NullReferenceException)
+            {
+                return Content(HttpStatusCode.NotFound, "Error getting list of categories");
+            }
             catch (Exception ex)
             {
                 return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
 
-        //GET: /api/Suppliers/{id}
+        //GET: /api/Suppliers/Get/{id}
         [HttpGet]
-        public IHttpActionResult GetSupplier(int id)
+        public IHttpActionResult Get(int id)
         {
             try
             {
@@ -69,9 +73,9 @@ namespace Lab.Ejercicio008.WebApi.Controllers
             }
         }
 
-        //POST: /api/Suppliers
+        //POST: /api/Suppliers/Add
         [HttpPost]
-        public IHttpActionResult AddSupplier([FromBody] SuppliersViewModel newSupplier)
+        public IHttpActionResult Add([FromBody] SuppliersViewModel newSupplier)
         {
             try
             {
@@ -83,11 +87,14 @@ namespace Lab.Ejercicio008.WebApi.Controllers
                 };
                 SuppliersLogic newLogic = new SuppliersLogic();
                 string status = newLogic.Add(oSupplier);
-                if (status.Contains("Error"))
+                if (status.Contains("successfully"))
                 {
-                    return Content(HttpStatusCode.BadRequest, "There are errors in the data provided");
+                    return Content(HttpStatusCode.Created, status);
                 }
-                return Content(HttpStatusCode.Created, oSupplier);
+                else
+                {
+                    return Content(HttpStatusCode.BadRequest, status);
+                }
             }
             catch (Exception ex)
             {
@@ -95,9 +102,9 @@ namespace Lab.Ejercicio008.WebApi.Controllers
             }
         }
 
-        //PUT: /api/Suppliers/
+        //PUT: /api/Suppliers/Update
         [HttpPut]
-        public IHttpActionResult EditSuppliers([FromBody] SuppliersViewModel supplierUpdate)
+        public IHttpActionResult Update([FromBody] SuppliersViewModel supplierUpdate)
         {
             try
             {
@@ -110,11 +117,14 @@ namespace Lab.Ejercicio008.WebApi.Controllers
                 };
                 SuppliersLogic newLogic = new SuppliersLogic();
                 string status = newLogic.Update(oSupplier);
-                if (status.Contains("Error"))
+                if (status.Contains("successfully"))
                 {
-                    return Content(HttpStatusCode.BadRequest, "There are errors in the data provided");
+                    return Content(HttpStatusCode.OK, status);
                 }
-                return Content(HttpStatusCode.Created, oSupplier);
+                else
+                {
+                    return Content(HttpStatusCode.BadRequest, status);
+                }
             }
             catch (Exception ex)
             {
@@ -122,23 +132,22 @@ namespace Lab.Ejercicio008.WebApi.Controllers
             }
         }
 
-        //POST: /api/Suppliers/{id}
+        //POST: /api/Suppliers/Del/{id}
         [HttpPost]
-        public IHttpActionResult DelSupplier(int id)
+        public IHttpActionResult Del(int id)
         {
             try
             {
                 SuppliersLogic newLogic = new SuppliersLogic();
                 string status = newLogic.Del(id);
-                if (status.Contains("Error"))
+                if (status.Contains("successfully"))
                 {
-                    return Content(HttpStatusCode.BadRequest, $"The supplier you want to delete does not exist {id}");
+                    return Content(HttpStatusCode.OK, status);
                 }
-                if (status.Contains("conflicted"))
+                else
                 {
-                    return Content(HttpStatusCode.BadRequest, $"The supplier you want to delete is related to another table");
+                    return Content(HttpStatusCode.BadRequest, status);
                 }
-                return Content(HttpStatusCode.OK, $"Deleted Supplier with ID: {id}");
             }
             catch (Exception ex)
             {

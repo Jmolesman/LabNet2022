@@ -72,6 +72,10 @@
       <Project>{5d313b59-d696-4f9d-91bb-20451e5ff4e4}</Project>
       <Name>Lab.Ejercicio004.EF.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lab.Ejercicio004.EF.Utils\Lab.Ejercicio004.EF.Utils.csproj">
+      <Project>{87469680-03A2-4381-A8CA-B398B42BAA01}</Project>
+      <Name>Lab.Ejercicio004.EF.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

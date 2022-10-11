@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Lab.Ejercicio004.EF.Entities;
+using Lab.Ejercicio004.EF.Utils;
 
 namespace Lab.Ejercicio004.EF.Logic
 {
@@ -11,8 +12,15 @@ namespace Lab.Ejercicio004.EF.Logic
         {
             try
             {
-                _context.Suppliers.Add(itemToAdd);
-                _context.SaveChanges();
+                if (SuppliersValidation.ValidateSupplier(itemToAdd.CompanyName,itemToAdd.ContactName,itemToAdd.ContactTitle))
+                {
+                    _context.Suppliers.Add(itemToAdd);
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    return "There are errors in the data provided";
+                }
             }
             catch (Exception)
             {
@@ -26,23 +34,38 @@ namespace Lab.Ejercicio004.EF.Logic
             try
             {
                 Suppliers supplierToDelete = _context.Suppliers.Find(id);
-                _context.Suppliers.Remove(supplierToDelete);
-                _context.SaveChanges();
+                if (supplierToDelete == null)
+                {
+                    return $"The supplier you want to delete does not exist {id}";
+                }
+                else
+                {
+                    _context.Suppliers.Remove(supplierToDelete);
+                    _context.SaveChanges();
+                }
             }
-            catch (System.Data.Entity.Infrastructure.DbUpdateException updateException)
+            catch (System.Data.Entity.Infrastructure.DbUpdateException)
             {
-                return updateException.InnerException.InnerException.Message;
+                return "The supplier you want to delete is related to another table";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return $"Error to delete Product {ex.Message} - {ex.GetType()}";
+                return "Unknown error detected when trying to delete a supplier";
             }
             return "Supplier Deleted Successfully";
         }
 
         public override List<Suppliers> GetAll()
         {
-            return _context.Suppliers.ToList();
+            try
+            {
+                return _context.Suppliers.ToList();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
         }
 
         public override Suppliers GetEntityByID(int id)
@@ -63,13 +86,27 @@ namespace Lab.Ejercicio004.EF.Logic
         {
             try
             {
-                var supplierToUpdate = _context.Suppliers.Find(itemToChange.SupplierID);
-                _context.Entry(supplierToUpdate).CurrentValues.SetValues(itemToChange);
-                _context.SaveChanges();
+                if (SuppliersValidation.ValidateSupplier(itemToChange.CompanyName, itemToChange.ContactName, itemToChange.ContactTitle))
+                {
+                    var supplierToUpdate = _context.Suppliers.Find(itemToChange.SupplierID);
+                    if (supplierToUpdate == null)
+                    {
+                        return $"The supplier you want to update does not exist {itemToChange.SupplierID}";
+                    }
+                    else
+                    {
+                        _context.Entry(supplierToUpdate).CurrentValues.SetValues(itemToChange);
+                        _context.SaveChanges();
+                    }
+                }
+                else
+                {
+                    return "There are errors in the data provided";
+                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return $"Error to update supplier {ex.Message}";
+                 return "Unknown error detected when trying to update supplier";
             }
             return "All data modify successfully";
         }

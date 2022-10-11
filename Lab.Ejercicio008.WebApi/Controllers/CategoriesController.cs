@@ -6,14 +6,15 @@ using System.Collections.Generic;
 using System.Net;
 using System.Web.Http;
 using System.Linq;
+using Lab.Ejercicio004.EF.Utils;
 
 namespace Lab.Ejercicio008.WebApi.Controllers
 {
     public class CategoriesController : ApiController
     {
-        //GET: /api/Categories
+        //GET: /api/Categories/GetAll
         [HttpGet]
-        public IHttpActionResult GetAllCategories()
+        public IHttpActionResult GetAll()
         {
             try
             {
@@ -27,15 +28,19 @@ namespace Lab.Ejercicio008.WebApi.Controllers
 
                 return Ok(listOfCategoriesViewModel);
             }
+            catch (NullReferenceException)
+            {
+                return Content(HttpStatusCode.NotFound, "Error getting list of categories");
+            }
             catch (Exception ex)
             {
                 return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
 
-        //GET: /api/Categories/{id}
+        //GET: /api/Categories/Get/{id}
         [HttpGet]
-        public IHttpActionResult GetCategory(int id)
+        public IHttpActionResult Get(int id)
         {
             try
             {
@@ -67,7 +72,7 @@ namespace Lab.Ejercicio008.WebApi.Controllers
 
         //POST: /api/Categories/Add/
         [HttpPost]
-        public IHttpActionResult AddCategory([FromBody] CategoriesViewModel newCategory)
+        public IHttpActionResult Add([FromBody] CategoriesViewModel newCategory)
         {
             try
             {
@@ -78,11 +83,14 @@ namespace Lab.Ejercicio008.WebApi.Controllers
                 };
                 CategoriesLogic newLogic = new CategoriesLogic();
                 string status = newLogic.Add(oCategory);
-                if (status.Contains("Error"))
+                if (status.Contains("successfully"))
                 {
-                    return Content(HttpStatusCode.BadRequest, "There are errors in the data provided");
+                    return Content(HttpStatusCode.Created, status);
                 }
-                return Content(HttpStatusCode.Created, oCategory);
+                else
+                {
+                    return Content(HttpStatusCode.BadRequest, status);
+                }
             }
             catch (Exception ex)
             {
@@ -90,9 +98,9 @@ namespace Lab.Ejercicio008.WebApi.Controllers
             }
         }
 
-        //PUT: /api/Categories/
+        //PUT: /api/Categories/Update
         [HttpPut]
-        public IHttpActionResult EditCategory([FromBody] CategoriesViewModel categoryUpdate)
+        public IHttpActionResult Update([FromBody] CategoriesViewModel categoryUpdate)
         {
             try
             {
@@ -104,11 +112,14 @@ namespace Lab.Ejercicio008.WebApi.Controllers
                 };
                 CategoriesLogic newLogic = new CategoriesLogic();
                 string status = newLogic.Update(oCategory);
-                if (status.Contains("Error"))
+                if (status.Contains("successfully"))
                 {
-                    return Content(HttpStatusCode.BadRequest, "There are errors in the data provided");
+                    return Content(HttpStatusCode.OK, status);
                 }
-                return Content(HttpStatusCode.Created, oCategory);
+                else
+                {
+                    return Content(HttpStatusCode.BadRequest, status);
+                }
             }
             catch (Exception ex)
             {
@@ -118,21 +129,20 @@ namespace Lab.Ejercicio008.WebApi.Controllers
 
         //POST: /api/Categories/Del/{id}
         [HttpPost]
-        public IHttpActionResult DelCategory(int id)
+        public IHttpActionResult Del(int id)
         {
             try
             {
                 CategoriesLogic newLogic = new CategoriesLogic();
                 string status = newLogic.Del(id);
-                if (status.Contains("Error"))
+                if (status.Contains("successfully"))
                 {
-                    return Content(HttpStatusCode.BadRequest, $"The category you want to delete does not exist {id}");
+                    return Content(HttpStatusCode.OK, status);
                 }
-                if (status.Contains("conflicted"))
+                else
                 {
-                    return Content(HttpStatusCode.BadRequest, $"The category you want to delete is related to another table");
+                    return Content(HttpStatusCode.BadRequest, status);
                 }
-                return Content(HttpStatusCode.OK, $"Deleted category with ID: {id}");
             }
             catch (Exception ex)
             {
