@@ -52,7 +52,7 @@ namespace Lab.Ejercicio004.EF.Logic
             {
                 return "Unknown error detected when trying to delete a supplier";
             }
-            return "Supplier Deleted Successfully";
+            return "Supplier Deleted successfully";
         }
 
         public override List<Suppliers> GetAll()

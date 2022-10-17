@@ -52,7 +52,7 @@ namespace Lab.Ejercicio004.EF.Logic
             {
                 return "Unknown error detected when trying to delete a Product";
             }
-            return "Product Deleted Successfully";
+            return "Product Deleted successfully";
         }
 
         public override List<Products> GetAll()

@@ -140,7 +140,7 @@ namespace Lab.Ejercicio008.WebApi.Controllers
             {
                 SuppliersLogic newLogic = new SuppliersLogic();
                 string status = newLogic.Del(id);
-                if (status.Contains("Successfully"))
+                if (status.Contains("successfully"))
                 {
                     return Content(HttpStatusCode.OK, status);
                 }
