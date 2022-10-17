@@ -11,7 +11,7 @@ namespace Lab.Ejercicio008.WebApi.Controllers
 {
     public class ProductsController : ApiController
     {
-        //GET: /api/Products/GetAll
+        //GET: /api/Products
         [HttpGet]
         public IHttpActionResult GetAll()
         {
@@ -42,7 +42,7 @@ namespace Lab.Ejercicio008.WebApi.Controllers
             }
         }
 
-        //GET: /api/Products/Get/{id}
+        //GET: /api/Products/{id}
         [HttpGet]
         public IHttpActionResult Get(int id)
         {
@@ -79,7 +79,7 @@ namespace Lab.Ejercicio008.WebApi.Controllers
             }
         }
 
-        //POST: /api/Products/Add
+        //POST: /api/Products
         [HttpPost]
         public IHttpActionResult Add([FromBody] ProductsViewModel newProduct)
         {
@@ -112,7 +112,7 @@ namespace Lab.Ejercicio008.WebApi.Controllers
             }
         }
 
-        //PUT: /api/Products/Update
+        //PUT: /api/Products
         [HttpPut]
         public IHttpActionResult Update([FromBody] ProductsViewModel productUpdate)
         {
@@ -146,7 +146,7 @@ namespace Lab.Ejercicio008.WebApi.Controllers
             }
         }
 
-        //POST: /api/Products/Del/{id}
+        //POST: /api/Products/{id}
         [HttpPost]
         public IHttpActionResult Del(int id)
         {

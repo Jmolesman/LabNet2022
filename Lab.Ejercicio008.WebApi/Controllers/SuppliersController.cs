@@ -13,7 +13,7 @@ namespace Lab.Ejercicio008.WebApi.Controllers
 {
     public class SuppliersController : ApiController
     {
-        //GET: /api/Suppliers/GetAll
+        //GET: /api/Suppliers
         [HttpGet]
         public IHttpActionResult GetAll()
         {
@@ -40,7 +40,7 @@ namespace Lab.Ejercicio008.WebApi.Controllers
             }
         }
 
-        //GET: /api/Suppliers/Get/{id}
+        //GET: /api/Suppliers/{id}
         [HttpGet]
         public IHttpActionResult Get(int id)
         {
@@ -73,7 +73,7 @@ namespace Lab.Ejercicio008.WebApi.Controllers
             }
         }
 
-        //POST: /api/Suppliers/Add
+        //POST: /api/Suppliers
         [HttpPost]
         public IHttpActionResult Add([FromBody] SuppliersViewModel newSupplier)
         {
@@ -102,7 +102,7 @@ namespace Lab.Ejercicio008.WebApi.Controllers
             }
         }
 
-        //PUT: /api/Suppliers/Update
+        //PUT: /api/Suppliers
         [HttpPut]
         public IHttpActionResult Update([FromBody] SuppliersViewModel supplierUpdate)
         {
@@ -132,7 +132,7 @@ namespace Lab.Ejercicio008.WebApi.Controllers
             }
         }
 
-        //POST: /api/Suppliers/Del/{id}
+        //POST: /api/Suppliers/{id}
         [HttpPost]
         public IHttpActionResult Del(int id)
         {

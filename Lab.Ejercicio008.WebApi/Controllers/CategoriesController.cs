@@ -7,12 +7,14 @@ using System.Net;
 using System.Web.Http;
 using System.Linq;
 using Lab.Ejercicio004.EF.Utils;
+using System.Web.Http.Cors;
 
 namespace Lab.Ejercicio008.WebApi.Controllers
 {
+    //[EnableCors(origins: "http://localhost:4200",headers: "*", methods:"*")]
     public class CategoriesController : ApiController
     {
-        //GET: /api/Categories/GetAll
+        //GET: /api/Categories
         [HttpGet]
         public IHttpActionResult GetAll()
         {
@@ -38,7 +40,7 @@ namespace Lab.Ejercicio008.WebApi.Controllers
             }
         }
 
-        //GET: /api/Categories/Get/{id}
+        //GET: /api/Categories/{id}
         [HttpGet]
         public IHttpActionResult Get(int id)
         {
@@ -70,7 +72,7 @@ namespace Lab.Ejercicio008.WebApi.Controllers
             }
         }
 
-        //POST: /api/Categories/Add/
+        //POST: /api/Categories
         [HttpPost]
         public IHttpActionResult Add([FromBody] CategoriesViewModel newCategory)
         {
@@ -98,7 +100,7 @@ namespace Lab.Ejercicio008.WebApi.Controllers
             }
         }
 
-        //PUT: /api/Categories/Update
+        //PUT: /api/Categories
         [HttpPut]
         public IHttpActionResult Update([FromBody] CategoriesViewModel categoryUpdate)
         {
@@ -127,7 +129,7 @@ namespace Lab.Ejercicio008.WebApi.Controllers
             }
         }
 
-        //POST: /api/Categories/Del/{id}
+        //POST: /api/Categories/{id}
         [HttpPost]
         public IHttpActionResult Del(int id)
         {
