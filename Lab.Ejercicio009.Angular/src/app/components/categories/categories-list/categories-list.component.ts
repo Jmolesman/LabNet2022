@@ -165,7 +165,6 @@ export class CategoriesListComponent implements OnInit {
   }
 
   onClickDeleteCategory(categoryDelete: CategoryModel): void{
-    console.log(categoryDelete.CategoryID);
     if (confirm("Are you sure to delete this category?"))
     {
       this.categoriesService.deleteCategories(categoryDelete.CategoryID).subscribe(
