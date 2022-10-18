@@ -186,7 +186,6 @@ export class SuppliersListComponent implements OnInit {
   }
 
   onClickDeleteSupplier(supplierDelete: SupplierModel): void{
-    console.log(supplierDelete.SupplierID);
     if (confirm("Are you sure to delete this supplier?"))
     {
       this.suppliersService.deleteSuppliers(supplierDelete.SupplierID).subscribe(
