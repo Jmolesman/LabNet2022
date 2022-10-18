@@ -214,7 +214,6 @@ export class ProductsListComponent implements OnInit {
   }
 
   onClickDeleteProduct(productDelete: ProductModel): void{
-    console.log(productDelete.ProductID);
     if (confirm("Are you sure to delete this product?"))
     {
       this.productsService.deleteProducts(productDelete.ProductID).subscribe(
