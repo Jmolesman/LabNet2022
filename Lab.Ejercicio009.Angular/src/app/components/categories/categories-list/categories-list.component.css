@@ -1,0 +1,27 @@
+.buttonCategoryList
+{
+    margin-right: 2px;
+    border-radius: 10px;
+    border-color: black;
+}
+
+.buttonCategoryList:hover
+{
+    border-width: 2px;
+}
+
+.buttonNewCategory
+{
+    border-radius: 10px;
+    border-color: black;
+}
+
+.buttonNewCategory:hover
+{
+    border-width: 2px;
+}
+
+h2
+{
+    text-align: center;
+}

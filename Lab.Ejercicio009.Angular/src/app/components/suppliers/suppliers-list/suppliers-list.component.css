@@ -1,0 +1,27 @@
+.buttonSupplierList
+{
+    margin-right: 2px;
+    border-radius: 10px;
+    border-color: black;
+}
+
+.buttonSupplierList:hover
+{
+    border-width: 2px;
+}
+
+.buttonNewSupplier
+{
+    border-radius: 10px;
+    border-color: black;
+}
+
+.buttonNewSupplier:hover
+{
+    border-width: 2px;
+}
+
+h2
+{
+    text-align: center;
+}

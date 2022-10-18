@@ -1,0 +1,97 @@
+<div class="container" style="width: 900px;">
+    <div class="row" *ngIf="showList">
+      <h2>Products List</h2>
+      <hr>
+      <div class="container text-center" aling="center">
+          <input type="button" value="Create new Product" class="buttonNewProduct btn btn-success" (click)="showInsertProductForm()">
+      </div>
+      <br>
+      <div class="row">
+          <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center">Product Name</th>
+                  <th scope="col" class="text-center">Quantity Per Unit</th>
+                  <th scope="col" class="text-center">Unit Price</th>
+                  <th scope="col" class="text-center">Options</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let product of productsList">
+                <tr style="height: 60px; padding: 4px;">
+                  <td>{{ product.ProductName }}</td>
+                  <td>{{ product.QuantityPerUnit }}</td>
+                  <td>{{ product.UnitPrice }}</td>
+                  <td>
+                        <input type="button" value="Edit"  (click)="showUpdateProductForm(product)" class="buttonProductList btn btn-secondary" style="padding-left: 20px; padding-right: 20px; margin-right: 15px;">
+                        <input type="button" value="Delete" (click)="onClickDeleteProduct(product)" class="buttonProductList btn btn-danger">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <span class="text-danger validation-reminder text-center" *ngIf="!DbConnection">
+                <strong>Unable to connect to the database</strong></span> 
+      </div>
+    </div>
+    <div class="row" *ngIf="showInsert || showUpdate">
+        <form [formGroup]="productForm">
+            <div class="form-group">
+                <div class="row text-center">
+                    <label for="productName" class="title"><strong>Product Name</strong></label>
+                    <br>
+                </div>
+                <input type="text" class="form-control" placeholder="Enter the name of the product" formControlName="productName">
+                <span class="text-danger validation-reminder" *ngIf="productNameFormControl.hasError('required') && productNameFormControl.touched">
+                    The name of the product is <strong>required</strong>
+                </span>   
+                <span class="text-danger validation-reminder" *ngIf="productNameFormControl.hasError('maxlength') && productNameFormControl.touched">
+                    The name of the product cannot be longer than <strong>40 characters</strong>
+                </span>  
+            </div>
+            <br>
+            <div class="form-group" >
+                <div class="row text-center">
+                    <label for="productQuantityPerUnit"><strong>Quantity Per Unit</strong></label>
+                    <br>
+                </div>
+                <input type="text" class="form-control" placeholder="Enter the quantity per unit of the item" formControlName="productQuantityPerUnit">
+                <span class="text-danger validation-reminder" *ngIf="productQuantityPerUnitFormControl.hasError('maxlength') && productQuantityPerUnitFormControl.touched">
+                    The quantity per unit detail cannot be longer than <strong>20 characters</strong></span>   
+            </div>
+            <br>
+            <div class="form-group" >
+                <div class="row text-center">
+                    <label for="productUnitPrice"><strong>Unit Price</strong></label>
+                    <br>
+                </div>
+                <input type="text" class="form-control" placeholder="Enter the price of the item" formControlName="productUnitPrice">
+                <span class="text-danger validation-reminder" *ngIf="productUnitPriceFormControl.hasError('pattern') && productUnitPriceFormControl.touched">
+                    The unit price must be a <strong>valid positive number greater than zero</strong></span>   
+            </div>
+            <br>
+            <div class="form-group" >
+                <div class="row text-center">
+                    <label for="productUnitsInStock"><strong>Units In Stock</strong></label>
+                    <br>
+                </div>
+                <input type="text" class="form-control" placeholder="Enter the stock of the item" formControlName="productUnitsInStock">
+                <span class="text-danger validation-reminder" *ngIf="productUnitsInStockFormControl.hasError('pattern') && productUnitsInStockFormControl.touched">
+                    The stock of the item must be a <strong>positive number or zero</strong></span>   
+            </div>
+            <br>
+            <div class="form-group" style="align-items: center; text-align: center; justify-content: center;">
+                <div class="row text-center">
+                    <label for="productDiscontinued"><strong>Discontinued</strong></label>
+                    <br>
+                </div>
+                <input type="checkbox" class="" formControlName="productDiscontinued">
+            </div>
+            <div class="form-group text-center" >
+                <br>
+                <input type="button" value="Cancel" class="buttonProductList btn btn-secondary" (click)="showProductsList()">
+                <input type="button" value="Insert" class="buttonProductList btn btn-success" [disabled]="productForm.invalid" *ngIf="showInsert" (click)="onClickInsertProduct()">
+                <input type="button" value="Update" class="buttonProductList btn btn-success" [disabled]="productForm.invalid" *ngIf="showUpdate" (click)="onClickUpdateProduct()">
+            </div>
+        </form>
+    </div>
+  </div>
+  

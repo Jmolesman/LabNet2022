@@ -1,0 +1,78 @@
+<div class="container" style="width: 900px;">
+    <div class="row" *ngIf="showList">
+      <h2>Suppliers List</h2>
+      <hr>
+      <div class="container text-center" aling="center">
+          <input type="button" value="Create new Supplier" class="buttonNewSupplier btn btn-success" (click)="showInsertSupplierForm()">
+      </div>
+      <br>
+      <div class="row">
+          <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center">Company Name</th>
+                  <th scope="col" class="text-center">Contact Name</th>
+                  <th scope="col" class="text-center">Contact Title</th>
+                  <th scope="col" class="text-center">Options</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let supplier of suppliersList">
+                <tr style="height: 60px; padding: 4px;">
+                  <td>{{ supplier.CompanyName }}</td>
+                  <td>{{ supplier.ContactName }}</td>
+                  <td>{{ supplier.ContactTitle }}</td>
+                  <td>
+                      <input type="button" value="Edit"  (click)="showUpdateSupplierForm(supplier)" class="buttonSupplierList btn btn-secondary"  style="padding-left: 20px; padding-right: 20px; margin-right: 15px;">
+                      <input type="button" value="Delete" (click)="onClickDeleteSupplier(supplier)" class="buttonSupplierList btn btn-danger">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <span class="text-danger validation-reminder text-center" *ngIf="!DbConnection">
+                <strong>Unable to connect to the database</strong></span> 
+      </div>
+    </div>
+    <div class="row" *ngIf="showInsert || showUpdate">
+        <form [formGroup]="supplierForm">
+            <div class="form-group">
+                <div class="row text-center">
+                    <label for="supplierCompanyName" class="title"><strong>Company Name</strong></label>
+                    <br>
+                </div>
+                <input type="text" class="form-control" placeholder="Enter the name of the company" formControlName="supplierCompanyName">
+                <span class="text-danger validation-reminder" *ngIf="supplierCompanyNameFormControl.hasError('required') && supplierCompanyNameFormControl.touched">
+                    The name of the company is <strong>required</strong>
+                </span>   
+                <span class="text-danger validation-reminder" *ngIf="supplierCompanyNameFormControl.hasError('maxlength') && supplierCompanyNameFormControl.touched">
+                    The name of the company cannot be longer than <strong>40 characters</strong>
+                </span>  
+            </div>
+            <br>
+            <div class="form-group" >
+                <div class="row text-center">
+                    <label for="supplierContactName"><strong>Contact Name</strong></label>
+                    <br>
+                </div>
+                <textarea class="form-control" style="height: 150px;" placeholder="Enter the name of the contact" formControlName="supplierContactName"></textarea>
+                <span class="text-danger validation-reminder" *ngIf="supplierContactNameFormControl.hasError('maxlength') && supplierContactNameFormControl.touched">
+                    The name of the contact cannot be longer than <strong>30 characters</strong></span>   
+            </div>
+            <div class="form-group" >
+                <div class="row text-center">
+                    <label for="supplierContactTitle"><strong>Contact Title</strong></label>
+                    <br>
+                </div>
+                <textarea class="form-control" style="height: 150px;" placeholder="Enter the title of the contact" formControlName="supplierContactTitle"></textarea>
+                <span class="text-danger validation-reminder" *ngIf="supplierContactTitleFormControl.hasError('maxlength') && supplierContactTitleFormControl.touched">
+                    The title of the contact cannot be longer than <strong>30 characters</strong></span>   
+            </div>
+            <div class="form-group text-center" >
+                <br>
+                <input type="button" value="Cancel" class="buttonSupplierList btn btn-secondary" (click)="showSuppliersList()" style="margin-right: 15px;">
+                <input type="button" value="Insert" class="buttonSupplierList btn btn-success" [disabled]="supplierForm.invalid" *ngIf="showInsert" (click)="onClickInsertSupplier()" style="padding-left: 15px; padding-right: 15px; margin-left: 15px;">
+                <input type="button" value="Update" class="buttonSupplierList btn btn-success" [disabled]="supplierForm.invalid" *ngIf="showUpdate" (click)="onClickUpdateSupplier()" style="padding-left: 15px; padding-right: 15px; margin-left: 15px;">
+            </div>
+        </form>
+    </div>
+  </div>
+  

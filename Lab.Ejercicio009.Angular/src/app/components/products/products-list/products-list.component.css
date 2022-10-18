@@ -1,0 +1,27 @@
+.buttonProductList
+{
+    margin-right: 2px;
+    border-radius: 10px;
+    border-color: black;
+}
+
+.buttonProductList:hover
+{
+    border-width: 2px;
+}
+
+.buttonNewProduct
+{
+    border-radius: 10px;
+    border-color: black;
+}
+
+.buttonNewProduct:hover
+{
+    border-width: 2px;
+}
+
+h2
+{
+    text-align: center;
+}

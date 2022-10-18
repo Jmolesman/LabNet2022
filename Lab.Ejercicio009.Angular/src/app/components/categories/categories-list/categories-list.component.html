@@ -1,0 +1,66 @@
+<div class="container" style="width: 900px;">
+  <div class="row" *ngIf="showList">
+    <h2>Categories List</h2>
+    <hr>
+    <div class="container text-center" aling="center">
+        <input type="button" value="Create new Category" class="buttonNewCategory btn btn-success" (click)="showInsertCategoryForm()">
+    </div>
+    <br>
+    <div class="row">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" class="text-center">Category</th>
+                <th scope="col" class="text-center">Description</th>
+                <th scope="col" class="text-center">Options</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let category of categoriesList">
+              <tr style="height: 60px; padding: 4px;">
+                <td>{{ category.CategoryName }}</td>
+                <td>{{ category.Description }}</td>
+                <td>
+                    <input type="button" value="Edit"  (click)="showUpdateCategoryForm(category)" class="buttonCategoryList btn btn-secondary"  style="padding-left: 20px; padding-right: 20px; margin-right: 15px;">
+                    <input type="button" value="Delete" (click)="onClickDeleteCategory(category)" class="buttonCategoryList btn btn-danger">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <span class="text-danger validation-reminder text-center" *ngIf="!DbConnection">
+            <strong>Unable to connect to the database</strong></span> 
+    </div>
+  </div>
+  <div class="row" *ngIf="showInsert || showUpdate">
+      <form [formGroup]="categoryForm">
+          <div class="form-group">
+              <div class="row text-center">
+                  <label for="categoryName" class="title"><strong>Category Name</strong></label>
+                  <br>
+              </div>
+              <input type="text" class="form-control" placeholder="Enter a name for the category" formControlName="categoryName">
+              <span class="text-danger validation-reminder" *ngIf="categoryNameFormControl.hasError('required') && categoryNameFormControl.touched">
+                  The category name is <strong>required</strong>
+              </span>   
+              <span class="text-danger validation-reminder" *ngIf="categoryNameFormControl.hasError('maxlength') && categoryNameFormControl.touched">
+                  The category name cannot be longer than <strong>15 characters</strong>
+              </span>  
+          </div>
+          <br>
+          <div class="form-group" >
+              <div class="row text-center">
+                  <label for="description"><strong>Description</strong></label>
+                  <br>
+              </div>
+              <textarea class="form-control" style="height: 150px;" placeholder="Enter a description for the category" formControlName="description"></textarea>
+              <span class="text-danger validation-reminder" *ngIf="categoryDescriptionFormControl.hasError('maxlength') && categoryDescriptionFormControl.touched">
+                  The description cannot be longer than <strong>200 characters</strong></span>   
+          </div>
+          <div class="form-group text-center" >
+              <br>
+              <input type="button" value="Cancel" class="buttonCategoryList btn btn-secondary" (click)="showCategoriesList()" style="margin-right: 15px;">
+              <input type="button" value="Insert" class="buttonCategoryList btn btn-success" [disabled]="categoryForm.invalid" *ngIf="showInsert" (click)="onClickInsertCategory()" style="padding-left: 15px; padding-right: 15px; margin-left: 15px;">
+              <input type="button" value="Update" class="buttonCategoryList btn btn-success" [disabled]="categoryForm.invalid" *ngIf="showUpdate" (click)="onClickUpdateCategory()" style="padding-left: 15px; padding-right: 15px; margin-left: 15px;">
+          </div>
+      </form>
+  </div>
+</div>
